@@ -4,20 +4,24 @@
 
 'use strict';
 
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-
 import 'babel-polyfill';
 
-import { Router, Route, browserHistory} from 'react-router';
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
+import { Router, Route, browserHistory,IndexRoute} from 'react-router';
+
+import App from '@components/app';
 import Info from '@components/info';
 import Hello from '@components/hello';
 
 window.onload = function () {
     ReactDOM.render(
         <Router history={browserHistory}>
-            <Route path="/" component={Hello} />
-            <Route path="/info" component={Info}/>
+            <Route path="/" component={App}>
+                <IndexRoute component={Hello}/>
+                <Route path="index" component={Info}/>
+                <Route path="info" component={Hello}/>
+            </Route>
         </Router>,
         document.getElementById('app')
     )
