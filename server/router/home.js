@@ -32,7 +32,7 @@ let renderPage = async function (projectName, bundleUrl, title, tpl) {
 };
 
 let index = async function (ctx,next) {
-    await renderPage.call(ctx, 'note', '/dist/app.js', 'note','index');
+    await renderPage.call(ctx, 'note', '/dist/app.js', 'Note-Write what you want','index');
 };
 
 module.exports.register = function (router) {
