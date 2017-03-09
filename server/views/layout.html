@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+           react-koa
+        {% endblock %}
+    </title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="Personal note sites, write what you want.">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://7mno74.com1.z0.glb.clouddn.com/pomy.jpg">
+    {% block css %}
+    {% endblock %}
+    <style type="text/css">
+        html, body, div, span, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        abbr, address, cite, code,
+        del, dfn, em, img, ins, kbd, q, samp,
+        small, strong, sub, sup, var,
+        b, i,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section, summary,
+        time, mark, audio, video {
+            margin:0;
+            padding:0;
+            border:0;
+            outline:0;
+            font-size:100%;
+            vertical-align:baseline;
+            background:transparent;
+        }
+
+        body {
+            line-height:1;
+        }
+
+        :focus {
+            outline: 1;
+        }
+
+        article,aside,canvas,details,figcaption,figure,
+        footer,header,hgroup,menu,nav,section,summary {
+            display:block;
+        }
+
+        nav ul {
+            list-style:none;
+        }
+
+        blockquote, q {
+            quotes:none;
+        }
+
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content:'';
+            content:none;
+        }
+
+        a {
+            margin:0;
+            padding:0;
+            border:0;
+            font-size:100%;
+            vertical-align:baseline;
+            background:transparent;
+        }
+
+        ins {
+            background-color:#ff9;
+            color:#000;
+            text-decoration:none;
+        }
+
+        mark {
+            background-color:#ff9;
+            color:#000;
+            font-style:italic;
+            font-weight:bold;
+        }
+
+        del {
+            text-decoration: line-through;
+        }
+
+        abbr[title], dfn[title] {
+            border-bottom:1px dotted #000;
+            cursor:help;
+        }
+
+        table {
+            border-collapse:collapse;
+            border-spacing:0;
+        }
+
+        hr {
+            display:block;
+            height:1px;
+            border:0;
+            border-top:1px solid #cccccc;
+            margin:1em 0;
+            padding:0;
+        }
+
+        input, select {
+            vertical-align:middle;
+        }
+        body{
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-weight: 400
+        }
+        * {
+            box-sizing: border-box;
+            font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Heiti SC", "Hiragino Sans GB", "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", sans-serif;
+        }
+    </style>
+    <style type="text/css">
+        .app-loading {
+            display: inline-block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-size: 0;
+            z-index: 11;
+            background-color: #f0f2f1;
+        }
+        @keyframes loadingCircle {
+            0% {
+                transform-origin: 50% 50%;
+                transform: rotate(0deg);
+            }
+            100% {
+                transform-origin: 50% 50%;
+                transform: rotate(360deg);
+            }
+        }
+        .app-loading:before{
+            content: '';
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 0;
+            width: 0;
+            height: 100%;
+        }
+        .loading-icon{
+            /**steps:http://www.cnblogs.com/aaronjs/p/4642015.html**/
+            animation: 0.85s loadingCircle steps(8) infinite;
+            width: 16px;
+            height: 16px;
+            background-image:url(http://7mno74.com1.z0.glb.clouddn.com/loading.png);
+            background-size: cover;
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .app-loading span{
+            vertical-align: middle;
+            position: relative;
+            display: inline-block;
+            margin-left: 7px;
+            color: #118BFA;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="app-loading">
+        <div class="loading-icon">正在加载...</div>
+        <span>正在拼命加载中...</span>
+    </div>
+    {% block content %}
+    {% endblock %}
+</div>
+{% block script %}
+{% endblock %}
+</body>
+</html>
