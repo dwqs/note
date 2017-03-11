@@ -5,20 +5,11 @@
 'use strict';
 
 import React, {Component,PropTypes} from 'react';
-import { Link} from 'react-router';
 
 export  default  class Hello extends Component{
     constructor (){
         super();
     }
-
-    static propTypes = {
-        desc: PropTypes.string
-    };
-
-    static defaultProps = {
-        desc: 'A simple template webpack 2 + react 15 + Koa 2 setup for projects'
-    };
 
     render(){
         return (

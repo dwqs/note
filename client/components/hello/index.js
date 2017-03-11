@@ -28,7 +28,7 @@ export  default  class Hello extends Component{
                 <p>{this.props.desc}</p>
                 <p><img src='/images/logo.png' alt="logo"/></p>
                 <p>doc: <a href="https://github.com/dwqs/react-koa">react-koa</a></p>
-                <p><Link to="/info">查看项目信息</Link></p>
+                <p><Link to="/new">新建日志</Link></p>
             </div>
         )
     }
