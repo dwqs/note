@@ -95,6 +95,7 @@ export default class NewNote extends Component{
             cancelable: true
         });
 
+        //https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
         this.areaScroll = new CustomEvent("areaScroll", {
             detail: {
 
