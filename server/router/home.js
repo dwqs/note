@@ -4,6 +4,7 @@
 
 'use strict';
 
+let config = require('../../config/index');
 let env = process.env.NODE_ENV || 'development';
 
 let renderOnline = async function (projectName, bundleUrl,title, tpl) {
@@ -20,8 +21,8 @@ let renderPage = async function (projectName, bundleUrl, title, tpl) {
     if (env === 'development') {
         this.body = await this.render(tpl, {
             scripts: [
-                'http://127.0.0.1:3000/dist/vendor.js',
-                `http://127.0.0.1:3000${bundleUrl}`
+                `http://127.0.0.1:${config.dev.clientPort}/dist/vendor.js`,
+                `http://127.0.0.1:${config.dev.clientPort}${bundleUrl}`
             ],
             styles: [],
             title: title
