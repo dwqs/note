@@ -46,13 +46,15 @@ export default class NewNote extends Component{
     render(){
         return (
             <div className="new-note full-height">
-                <div className="row full-height">
-                    <div className="cols full-height">
-                        <textarea onInput={this.valChange.bind(this)} onScroll={this.handleAreaScroll.bind(this)} className="source full-height" placeholder="输入markdown文本"></textarea>
+                <div className="new-note-body full-height">
+                    <div className="row full-height">
+                        <div className="cols full-height">
+                            <textarea onInput={this.valChange.bind(this)} onScroll={this.handleAreaScroll.bind(this)} className="source full-height" placeholder="输入markdown文本"></textarea>
+                        </div>
+                        <section ref="result" className="cols result-html full-height" onScroll={this.handleSectionScroll.bind(this)}>
+                            <div className="note-markdown-body" dangerouslySetInnerHTML={this.state}></div>
+                        </section>
                     </div>
-                    <section ref="result" className="cols result-html full-height" onScroll={this.handleSectionScroll.bind(this)}>
-                        <div className="note-markdown-body" dangerouslySetInnerHTML={this.state}></div>
-                    </section>
                 </div>
             </div>
         )

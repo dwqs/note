@@ -4,8 +4,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 15px;
     background-color: #F7F7F7
+}
+
+.new-note-body{
+    margin: 0 40px;
+    padding: 15px 0;
 }
 
 .full-height{
