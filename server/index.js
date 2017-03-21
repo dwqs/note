@@ -18,6 +18,8 @@ let config = require('../config/index');
 let port = process.env.NODE_ENV != 'production' ? config.dev.serverPort : config.build.serverPort;
 let controller = require('./router');
 
+let exception = require('./middleware/exception');
+
 let app = new Koa();
 
 app.context.render = co.wrap(render({
@@ -28,6 +30,7 @@ app.context.render = co.wrap(render({
     writeBody: false
 }));
 
+app.use(exception);
 app.use(bodyParser());
 app.use(json());
 // Serve static files
