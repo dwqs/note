@@ -4,6 +4,8 @@
 
 'use strict';
 
+import './reset.css';
+
 import React, {Component,PropTypes} from 'react';
 
 export  default  class Hello extends Component{

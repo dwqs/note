@@ -9,5 +9,5 @@ let router = new Router();
 
 require('./home').register(router);
 module.exports.register = function (app) {
-    app.use(router.routes());
+    app.use(router.routes()).use(router.allowedMethods());
 };

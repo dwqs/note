@@ -13,6 +13,7 @@ import { Router, Route, browserHistory,IndexRoute} from 'react-router';
 import App from '@components/app';
 import NewNote from '@components/new-note';
 import Hello from '@components/hello';
+import NotFound from '@components/not-found';
 
 window.onload = function () {
     ReactDOM.render(
@@ -21,6 +22,7 @@ window.onload = function () {
                 <IndexRoute component={Hello}/>
                 <Route path="index" component={Hello}/>
                 <Route path="new" component={NewNote}/>
+                <Route path="*" component={NotFound}/>
             </Route>
         </Router>,
         document.getElementById('app')

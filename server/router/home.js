@@ -39,4 +39,7 @@ let index = async function (ctx,next) {
 module.exports.register = function (router) {
     router.all('/', index);
     router.all('/index', index);
+
+    //404
+    router.get('*', index);
 };
