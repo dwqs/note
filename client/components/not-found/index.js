@@ -29,6 +29,9 @@ export  default  class NotFound extends Component{
                         </div>
                     </div>
                 </div>
+                <footer className="footer">
+                    Pomy @ <a href="https://github.com/dwqs/note" target="_blank">Notes</a>
+                </footer>
             </div>
         )
     }
