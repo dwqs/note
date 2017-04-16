@@ -1,0 +1,17 @@
+{
+  "apps": [
+    {
+      "name": "note",
+      "script": "../server/index.js",
+      "args": [],
+      "log_date_format": "YYYY-MM-DD HH:mm Z",
+      "error_file": "note.log",
+      "out_file": "note.log",
+      "node_args": "--harmony",
+      "cwd": "..",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}

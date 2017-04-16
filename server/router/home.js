@@ -10,7 +10,7 @@ let env = process.env.NODE_ENV || 'development';
 let renderOnline = async function (projectName, bundleUrl,title, tpl) {
 
     this.body = await this.render(tpl, {
-        scripts:['/dist/vendor.js',bundleUrl],
+        scripts:['/dist/common.js',bundleUrl],
         styles: ['/dist/styles.css'],
         title: title
     });
@@ -21,7 +21,7 @@ let renderPage = async function (projectName, bundleUrl, title, tpl) {
     if (env === 'development') {
         this.body = await this.render(tpl, {
             scripts: [
-                `http://127.0.0.1:${config.dev.clientPort}/dist/vendor.js`,
+                `http://127.0.0.1:${config.dev.clientPort}/dist/common.js`,
                 `http://127.0.0.1:${config.dev.clientPort}${bundleUrl}`
             ],
             styles: [],

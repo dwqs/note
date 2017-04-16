@@ -20,20 +20,20 @@ let url = `http://localhost:${config.dev.serverPort}`;
 let browserIsOpen = false;
 
 gulp.task('assets', () =>
-    gulp.src(['./images/**/*'], {base: './'})
-        .pipe(gulp.dest('./public/'))
+    gulp.src(['./client/images/**/*'], {base: './client'})
+        .pipe(gulp.dest('./public/dist'))
         .pipe(rev())
-        .pipe(gulp.dest('./public/'))
+        .pipe(gulp.dest('./public/dist'))
         .pipe(rev.manifest('manifest.json',{
             base: './',
             merge: true  // merge with the existing manifest if one exists
         }))
-        .pipe(gulp.dest('./public/'))
+        .pipe(gulp.dest('./public/dist'))
 );
 
 // clean static resource
 gulp.task('clean', () =>
-    del(['../public/**/*'],{read: false, force: true})
+    del(['./public/**/*'],{read: false, force: true})
 );
 
 gulp.task('dev', ['assets'], () => {

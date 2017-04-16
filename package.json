@@ -4,7 +4,7 @@
     "description": "Personal note sites, write what you want.",
     "author": "dwqs",
     "scripts": {
-      "dev": "cross-env NODE_ENV=development node --harmony ./server/note",
+      "dev": "cross-env NODE_ENV=development node --harmony ./server/index",
       "gulp:dev": "cross-env NODE_ENV=development ./node_modules/.bin/gulp --gulpfile ./gulpfile.js dev",
       "clean": "cross-env NODE_ENV=development ./node_modules/.bin/gulp --gulpfile ./gulpfile.js clean",
       "prod": "cross-env NODE_ENV=production node --harmony ./server/note",

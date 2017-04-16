@@ -18,7 +18,7 @@ let env = process.env.NODE_ENV || 'production';
 console.log(chalk.cyan('   building for production...\n'));
 
 gulp.task('assets',['clean'], () =>
-    gulp.src(['./images/**/*'], {base: './'})
+    gulp.src(['./client/images/**/*'], {base: './client'})
         .pipe(gulp.dest('./public/dist'))
         .pipe(rev())
         .pipe(gulp.dest('./public/dist'))

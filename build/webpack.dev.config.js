@@ -49,7 +49,7 @@ devConfig.devServer = {
     compress: true,
     historyApiFallback: true,
     stats: 'normal',
-    contentBase: '../public',
+    contentBase: './public',
     publicPath: config.dev.assetsPublicPath
 };
 
