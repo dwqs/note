@@ -12,8 +12,8 @@ let rev = require('gulp-rev');
 let webpack = require('webpack');
 let WebpackDevServer = require('webpack-dev-server');
 
-let webpackDevConfig = require('../build/webpack.dev.config.js');
-let config = require('../config/index');
+let webpackDevConfig = require('./build/webpack.dev.config.js');
+let config = require('./config/index');
 
 let env = process.env.NODE_ENV || 'development';
 let url = `http://localhost:${config.dev.serverPort}`;
@@ -21,14 +21,14 @@ let browserIsOpen = false;
 
 gulp.task('assets', () =>
     gulp.src(['./images/**/*'], {base: './'})
-        .pipe(gulp.dest('../public/'))
+        .pipe(gulp.dest('./public/'))
         .pipe(rev())
-        .pipe(gulp.dest('../public/'))
+        .pipe(gulp.dest('./public/'))
         .pipe(rev.manifest('manifest.json',{
             base: './',
             merge: true  // merge with the existing manifest if one exists
         }))
-        .pipe(gulp.dest('../public/'))
+        .pipe(gulp.dest('./public/'))
 );
 
 // clean static resource

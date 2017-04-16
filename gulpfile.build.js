@@ -11,7 +11,7 @@ let chalk = require('chalk');
 let rev = require('gulp-rev');
 let webpack = require('webpack');
 
-let webpackProdConfig = require('../build/webpack.prod.config.js');
+let webpackProdConfig = require('./build/webpack.prod.config.js');
 
 let env = process.env.NODE_ENV || 'production';
 
@@ -19,19 +19,19 @@ console.log(chalk.cyan('   building for production...\n'));
 
 gulp.task('assets',['clean'], () =>
     gulp.src(['./images/**/*'], {base: './'})
-        .pipe(gulp.dest('../public/dist'))
+        .pipe(gulp.dest('./public/dist'))
         .pipe(rev())
-        .pipe(gulp.dest('../public/dist'))
+        .pipe(gulp.dest('./public/dist'))
         .pipe(rev.manifest('manifest.json',{
             base: './',
             merge: true  // merge with the existing manifest if one exists
         }))
-        .pipe(gulp.dest('../public/dist'))
+        .pipe(gulp.dest('./public/dist'))
 );
 
 // clean static resource
 gulp.task('clean', () =>
-    del(['../public/**/*'],{read: false, force: true})
+    del(['./public/**/*'],{read: false, force: true})
 );
 
 gulp.task('build', ['assets'], (cb) => {
