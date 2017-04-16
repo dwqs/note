@@ -6,29 +6,54 @@
 
 import './index.css';
 
-import React, {Component,PropTypes} from 'react';
+import React, {Component} from 'react';
 import { Link} from 'react-router';
+import {observer,inject} from 'mobx-react';
 
+//@inject(['list'])
+@inject('list')
+@observer
 export  default  class Hello extends Component{
     constructor (){
         super();
     }
 
-    static propTypes = {
-        desc: PropTypes.string
-    };
 
-    static defaultProps = {
-        desc: 'A simple template webpack 2 + react 15 + Koa 2 setup for projects'
-    };
+    add = () => {
+        console.log('add');
+        this.props.list.syncAddTodo('test');
+    }
+
+    delete = (index) => {
+        return () => {
+            console.log('delete',index);
+            this.props.list.deleteTodo(index);
+        }
+    }
+
+    asyncAdd = () => {
+        console.log('async add');
+        this.props.list.asyncAddTodo('async').then((data)=> console.log(data));
+    }
 
     render(){
+        console.log('list',this.props.list);
+        console.log('length',this.props.list.listCount)
         return (
             <div className="desc">
-                <p>{this.props.desc}</p>
-                <p><img src='/images/logo.png' alt="logo"/></p>
+                <p>A simple template webpack 2 + react 15 + Koa 2 setup for projects</p>
+                <p><img src='/dist/images/logo.png' alt="logo"/></p>
                 <p>doc: <a href="https://github.com/dwqs/react-koa">react-koa</a></p>
                 <p><Link to="/new">新建日志</Link></p>
+                <button onClick={this.add}>添加</button>
+                <button onClick={this.asyncAdd}>异步添加</button>
+                <ul>
+                    {
+                        this.props.list.todos.map((item,index) => {
+                            return <li key={index} onClick={this.delete(index)}>{item}</li>
+                        })
+                    }
+                </ul>
             </div>
         )
     }

@@ -9,6 +9,9 @@ import 'babel-polyfill';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory,IndexRoute} from 'react-router';
+import {Provider} from 'mobx-react';
+
+import list from '../model/list';
 
 import App from '@components/app';
 import NewNote from '@components/new-note';
@@ -17,14 +20,18 @@ import NotFound from '@components/not-found';
 
 window.onload = function () {
     ReactDOM.render(
-        <Router history={browserHistory}>
-            <Route path="/" component={App}>
-                <IndexRoute component={Hello}/>
-                <Route path="index" component={Hello}/>
-                <Route path="new" component={NewNote}/>
-                <Route path="*" component={NotFound}/>
-            </Route>
-        </Router>,
+        <Provider
+            list = {list}
+        >
+            <Router history={browserHistory}>
+                <Route path="/" component={App}>
+                    <IndexRoute component={Hello}/>
+                    <Route path="index" component={Hello}/>
+                    <Route path="new" component={NewNote}/>
+                    <Route path="*" component={NotFound}/>
+                </Route>
+            </Router>
+        </Provider>,
         document.getElementById('app')
     )
 };

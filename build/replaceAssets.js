@@ -18,7 +18,7 @@ function ReplaceAssert(options) {
 
 ReplaceAssert.prototype.apply = compiler => {
     compiler.plugin('emit', (compilation, callback) => {
-        let reg = /\/images\/(.*?\.(png|jpg|jpeg|gif|swf|eot|svg|ttf|woff|svg))/ig;
+        let reg = /images\/(.*?\.(png|jpg|jpeg|gif|swf|eot|svg|ttf|woff|svg))/ig;
         let assetKeys = Object.keys(compilation.assets);
 
         let manifest = {};
@@ -37,7 +37,7 @@ ReplaceAssert.prototype.apply = compiler => {
                     if (manifest[`${matchItem}`]) {
                         return matchItem;
                     } else {
-                        return `/dist${matchItem}`
+                        return `/dist/${matchItem}`
                     }
                 });
                 compilation.assets[assetKey] = {

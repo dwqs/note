@@ -7,8 +7,6 @@
 let path = require('path');
 let webpack = require('webpack');
 
-let ReplaceAssert = require('./replaceAssets');
-
 module.exports = {
     context: path.join(__dirname, '../client'),
     module: {
@@ -44,7 +42,6 @@ module.exports = {
         hints: false
     },
     plugins:[
-        new ReplaceAssert(),
         new webpack.optimize.CommonsChunkPlugin({
             name: ['react','react-router','react-dom'],
             filename: "common.js"
