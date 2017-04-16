@@ -7,8 +7,6 @@
 let path = require('path');
 let webpack = require('webpack');
 
-let vendor = ['react','react-dom'];
-
 module.exports = {
     module: {
         rules: [
@@ -44,8 +42,8 @@ module.exports = {
     },
     plugins:[
         new webpack.optimize.CommonsChunkPlugin({
-            name:"vendor",
-            filename:"vendor.js"
+            name:"commons",
+            minChunks: 3
         })
     ]
 };
