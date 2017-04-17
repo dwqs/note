@@ -4,7 +4,9 @@
 
 'use strict';
 
-import {observable, computed, action} from 'mobx';
+import {observable, computed, action, useStrict} from 'mobx';
+
+useStrict(true);
 
 class List {
     @observable
