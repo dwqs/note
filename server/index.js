@@ -19,6 +19,7 @@ let port = process.env.NODE_ENV != 'production' ? config.dev.serverPort : config
 let controller = require('./router');
 
 let exception = require('./middleware/exception');
+let auth = require('./middleware/auth');
 
 let app = new Koa();
 
@@ -31,6 +32,7 @@ app.context.render = co.wrap(render({
 }));
 
 app.use(exception);
+app.use(auth);
 app.use(bodyParser());
 app.use(json());
 // Serve static files
