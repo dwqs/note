@@ -39,3 +39,4 @@ jspm_packages
 node_modules
 .DS_Store
 public
+server/admin/

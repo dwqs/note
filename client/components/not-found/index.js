@@ -20,7 +20,7 @@ export  default  class NotFound extends Component{
                 <div className="box">
                     <div className="clearfix">
                         <figure className="figure">
-                            <img src="/images/404.png" alt="杯具啊" />
+                            <img src="/dist/images/404.png" alt="杯具啊" />
                         </figure>
                         <h1>杯具啊！</h1>
                         <div className="p">HTTP 404……<br />可能这个页面已经飞走了</div>

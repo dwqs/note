@@ -3,6 +3,8 @@
  * 网络请求封装
  */
 
+'use strict';
+
 export default {
     get (obj) {
         return Promise.resolve(

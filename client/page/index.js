@@ -12,21 +12,25 @@ import { Router, Route, browserHistory,IndexRoute} from 'react-router';
 import {Provider} from 'mobx-react';
 
 import list from '../model/list';
+import userStatus from '../model/status';
 
 import App from '@components/app';
 import NewNote from '@components/new-note';
 import Hello from '@components/hello';
 import NotFound from '@components/not-found';
+import Login from '@components/login';
 
 window.onload = function () {
     ReactDOM.render(
         <Provider
             list = {list}
+            userStatus = {userStatus}
         >
             <Router history={browserHistory}>
                 <Route path="/" component={App}>
                     <IndexRoute component={Hello}/>
                     <Route path="index" component={Hello}/>
+                    <Route path="login" component={Login}/>
                     <Route path="new" component={NewNote}/>
                     <Route path="*" component={NotFound}/>
                 </Route>

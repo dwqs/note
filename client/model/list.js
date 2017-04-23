@@ -1,5 +1,6 @@
 /**
  * Created by pomy on 2017/4/16.
+ * 列表数据
  */
 
 'use strict';
@@ -45,6 +46,6 @@ class List {
     }
 }
 
-let list = new List(['init1','init2']);
+let list = new List([]);
 
 export default list;

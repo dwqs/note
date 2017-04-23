@@ -4,12 +4,12 @@
 
 'use strict';
 
-let ignoreAuthPaths = [/\/create\//, /\/edit\/\d+$/, /\/login\//];
+let ignoreAuthPaths = [/\/new\/?/, /\/edit\/\d+\/?/];
 
 module.exports = {
     isNeedAuth: (path) => {
         for(let item in ignoreAuthPaths){
-            if(item.test(path)){
+            if(ignoreAuthPaths[item].test(path)){
                 return true;
             }
         }
