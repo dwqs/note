@@ -35,6 +35,9 @@ module.exports = {
             '@components': path.resolve(__dirname, '../client/components')
         }
     },
+    externals: {
+        jquery: 'jQuery'
+    },
     resolveLoader: {
         modules: [path.join(__dirname, '../node_modules')]
     },
@@ -42,6 +45,12 @@ module.exports = {
         hints: false
     },
     plugins:[
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery"
+        }),
+
         new webpack.optimize.CommonsChunkPlugin({
             name: ['react','react-router','react-dom'],
             filename: "common.js"
