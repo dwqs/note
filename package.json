@@ -11,9 +11,11 @@
     "build": "cross-env NODE_ENV=production ./node_modules/.bin/gulp --gulpfile ./gulpfile.build.js build"
   },
   "dependencies": {
+    "axios": "^0.16.1",
     "babel-polyfill": "^6.23.0",
     "co": "^4.6.0",
     "highlight.js": "^9.9.0",
+    "jsonwebtoken": "^7.3.0",
     "koa": "^2.0.0",
     "koa-bodyparser": "^4.1.0",
     "koa-compress": "^2.0.0",
@@ -27,8 +29,7 @@
     "mobx-react": "^4.1.8",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "react-router": "^3.0.2",
-    "axios": "^0.16.1"
+    "react-router": "^3.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
