@@ -8,6 +8,7 @@
 let jwt = require('jsonwebtoken');
 
 let admin = require('../admin/users.json');
+let helper = require('../lib/index');
 
 let status = function (ctx) {
     let token = ctx.cookies.get('token');
@@ -43,7 +44,7 @@ let sign = function (ctx) {
         res = {
             code: 2000,
             data: {
-                message: '用户名或者密码错误'
+                message: helper.getTypeByCode(2000)
             }
         }
     }

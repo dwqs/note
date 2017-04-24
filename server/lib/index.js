@@ -5,6 +5,16 @@
 'use strict';
 
 let ignoreAuthPaths = [/\/new\/?/, /\/edit\/\d+\/?/];
+let code2type = [{
+    code: 2000,
+    type: '用户名或者密码错误'
+},{
+    code: 2001,
+    type: 'token 无效'
+},{
+    code: 404,
+    type: '请求的路径不存在'
+}];
 
 module.exports = {
     isNeedAuth: (path) => {
@@ -14,5 +24,14 @@ module.exports = {
             }
         }
         return false;
+    },
+
+    getTypeByCode: (code) => {
+        for(let index in code2type ){
+            if(code2type[index].code === code){
+                return code2type[index].type;
+            }
+        }
+        return 'unknown type';
     }
 };

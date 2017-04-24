@@ -7,17 +7,21 @@
 let jwt = require('jsonwebtoken');
 
 let admin = require('../admin/users.json');
-let pathHelper = require('../lib/index');
+let helper = require('../lib/index');
 
 module.exports = async function (ctx, next) {
-    if(!pathHelper.isNeedAuth(ctx.path)){
+    if(!helper.isNeedAuth(ctx.path)){
         await next();
-    } else if(pathHelper.isNeedAuth(ctx.path)) {
+    } else if(helper.isNeedAuth(ctx.path)) {
         let token = ctx.cookies.get('token');
-        let decoded = jwt.verify(token, admin.privateKey);
 
-        if (decoded !== admin.token) {
+        if (!token) {
             ctx.throw(401, '缺少认证数据, 需重新登录');
+        } else {
+            let decoded = jwt.verify(token, admin.privateKey);
+            if(decoded !== admin.token){
+                ctx.throw(2001, helper.getTypeByCode(2001));
+            }
         }
         await next();
     }
