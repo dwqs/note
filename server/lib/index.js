@@ -14,6 +14,9 @@ let code2type = [{
 },{
     code: 404,
     type: '请求的路径不存在'
+},{
+    code: 500,
+    type: '服务端错误'
 }];
 
 module.exports = {
