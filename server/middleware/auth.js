@@ -16,7 +16,7 @@ module.exports = async function (ctx, next) {
         let token = ctx.cookies.get('token');
 
         if (!token) {
-            ctx.throw(401, '缺少认证数据, 需重新登录');
+            ctx.throw(401, helper.getTypeByCode(401));
         } else {
             let decoded = jwt.verify(token, admin.privateKey);
             if(decoded !== admin.token){

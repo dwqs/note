@@ -17,6 +17,9 @@ let code2type = [{
 },{
     code: 500,
     type: '服务端错误'
+},{
+    code: 401,
+    type: '认证错误'
 }];
 
 module.exports = {
