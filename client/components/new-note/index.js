@@ -7,7 +7,7 @@
 import './index.css';
 
 import React, {Component,PropTypes} from 'react';
-import { Button, message, Input, Icon, Radio} from 'antd';
+import { Button, message, Input, Icon, Radio, Modal} from 'antd';
 import {observer,inject} from 'mobx-react';
 import marked from 'marked';
 import hljs from 'highlight.js';
@@ -23,7 +23,8 @@ export default class NewNote extends Component{
             __html: '',
             loading: false,
             title: '',
-            isPublic: true
+            isPublic: true,
+            visible: false
         };
 
         this.top = 0;
@@ -74,11 +75,8 @@ export default class NewNote extends Component{
 
     cancelSaveNote = () => {
         this.setState({
-            title: '',
-            __html: ''
+            visible: true
         });
-
-        window.location = '/index';
     };
 
     emitEmpty = () => {
@@ -93,6 +91,22 @@ export default class NewNote extends Component{
         });
     };
 
+    handleOk = (e) => {
+        this.setState({
+            title: '',
+            __html: '',
+            visible: false
+        });
+
+        window.location = '/index';
+    };
+
+    handleCancel = (e) => {
+        this.setState({
+            visible: false,
+        });
+    };
+
     render() {
 
         const suffix = this.state.title ? <Icon type="close-circle" onClick={this.emitEmpty} /> : null;
@@ -104,6 +118,11 @@ export default class NewNote extends Component{
         return (
             <div className="new-note full-height">
                 <div className="new-note-body full-height">
+                    <Modal title="取消保存日记" visible={this.state.visible}
+                           onOk={this.handleOk} onCancel={this.handleCancel}
+                    >
+                        <p>确定取消保存日记吗？</p>
+                    </Modal>
                     <div className="note-title">
                         <Input
                             suffix={suffix}
