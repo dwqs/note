@@ -50,7 +50,8 @@ export  default  class Hello extends Component{
                 window.location = '/index';
             }
         }, (err) => {
-            message.error('登录出错');
+            let msg = err.message || '登录出错';
+            message.error(msg);
             this.setState({
                 loading: false
             });
