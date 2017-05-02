@@ -13,6 +13,8 @@ let json = require('koa-json');
 let bodyParser = require('koa-bodyparser');
 let co = require('co');
 let render = require('koa-swig');
+let mongoose = require('mongoose');
+let Promise = require("bluebird");
 
 let config = require('../config/index');
 let port = process.env.NODE_ENV != 'production' ? config.dev.serverPort : config.build.serverPort;
@@ -20,8 +22,20 @@ let controller = require('./router');
 
 let exception = require('./middleware/exception');
 let auth = require('./middleware/auth');
+let dbConfig = require('./db/config');
 
 let app = new Koa();
+
+Promise.promisifyAll(mongoose);
+
+mongoose.connect(dbConfig.uri, dbConfig.options)
+    .then((res) => {
+
+    }, (err) => {
+        console.log('connect db err111', err)
+    }).catch((err) => {
+        console.log('connect db err222', err)
+    });
 
 app.context.render = co.wrap(render({
     root: path.resolve(__dirname, './views'),
