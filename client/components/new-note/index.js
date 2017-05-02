@@ -21,6 +21,7 @@ export default class NewNote extends Component{
         super();
         this.state = {
             __html: '',
+            text: '',
             loading: false,
             title: '',
             isPublic: true,
@@ -39,7 +40,8 @@ export default class NewNote extends Component{
         this.maxScroll = e.target.scrollHeight - e.target.clientHeight;
         this.resDom.dispatchEvent(this.areaInput);
         this.setState({
-            __html: marked(e.target.value)
+            __html: marked(e.target.value),
+            text: e.target.value
         })
     }
 
@@ -64,13 +66,43 @@ export default class NewNote extends Component{
             message.warning('请输入标题');
             return;
         }
-        if(!this.state.__html){
+        if(!this.state.__html || !this.state.text){
             message.warning('请输入文本');
             return;
         }
         this.setState({
             loading: true
         });
+
+        this.props.note.saveNote({
+            title: this.state.title,
+            content: this.state.text,
+            isPublic: this.state.isPublic
+        }).then((res) => {
+            if(res.code){
+                message.error(res.data.message);
+            } else {
+                this.setState({
+                    loading: false,
+                    __html: '',
+                    text: '',
+                    title: '',
+                    isPublic: true,
+                    visible: false
+                });
+                message.success('日记保存成功');
+            }
+        }, (err) => {
+            message.error('保存日记错误');
+            this.setState({
+                loading: false
+            });
+        }).catch((err) => {
+            message.error('保存日记错误');
+            this.setState({
+                loading: false
+            });
+        })
     };
 
     cancelSaveNote = () => {
@@ -95,7 +127,8 @@ export default class NewNote extends Component{
         this.setState({
             title: '',
             __html: '',
-            visible: false
+            visible: false,
+            text: ''
         });
 
         window.location = '/index';
@@ -132,7 +165,7 @@ export default class NewNote extends Component{
                     </div>
                     <div className="row full-height">
                         <div className="cols full-height">
-                            <textarea onInput={this.valChange.bind(this)} onScroll={this.handleAreaScroll.bind(this)} className="source full-height" placeholder="输入markdown文本"></textarea>
+                            <textarea value={this.state.text} onInput={this.valChange.bind(this)} onScroll={this.handleAreaScroll.bind(this)} className="source full-height" placeholder="输入markdown文本"></textarea>
                         </div>
                         <section ref="result" className="cols result-html full-height" onScroll={this.handleSectionScroll.bind(this)}>
                             <div className="note-markdown-body" dangerouslySetInnerHTML={this.state}></div>

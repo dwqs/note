@@ -21,7 +21,7 @@ class Note {
 
     @action
     saveNote(data){
-
+        return api.savaNote(data);
     }
 
     @action

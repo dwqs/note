@@ -23,5 +23,13 @@ export default {
             data: data
         });
         return res;
+    },
+
+    async savaNote(data){
+        let res = await network.post({
+            url: '/note/save',
+            data: data
+        });
+        return res;
     }
 };

@@ -8,6 +8,7 @@ let Router = require('koa-router');
 let router = new Router();
 
 require('./login').register(router);
+require('./note').register(router);
 require('./home').register(router);
 
 module.exports.register = function (app) {

@@ -5,11 +5,11 @@
 'use strict';
 
 let mongoose = require('mongoose');
-let Promise = require("bluebird");
+
 let Schema = mongoose.Schema;
 
 let NoteSchema = new Schema({
-    title: { type: String, required: true},             //标题
+    title: { type: String, required: true},              //标题
     content: { type: String},                            //内容
     created_time: { type: Date, default: Date.now},      // 创建时间
     updated_time: { type: Date, default: Date.now},      // 更新日期
@@ -21,8 +21,7 @@ let NoteSchema = new Schema({
     }
 });
 
-let NoteModel = mongoose.model('note', NoteSchema);
+// let NoteModel = mongoose.model('Note', NoteSchema);
+// Promise.promisifyAll(NoteModel);
 
-Promise.promisifyAll(NoteModel);
-
-module.exports = NoteModel;
+module.exports = NoteSchema;
