@@ -30,7 +30,7 @@ let saveNote = async function (ctx,next) {
         ctx.body = {
             code: 2002,
             data: {
-                message: helper.getTypeByCode(2002)
+                message: err.message || helper.getTypeByCode(2002)
             }
         }
     }

@@ -25,8 +25,9 @@ class UserStatus {
                 this.changeStatus(false);
             }
         }, (err) => {
+            let msg = err.message || '获取登录状态错误';
             this.changeStatus(false);
-            message.error('获取登录状态错误');
+            message.error(msg);
         })
     }
 

@@ -93,12 +93,14 @@ export default class NewNote extends Component{
                 message.success('日记保存成功');
             }
         }, (err) => {
-            message.error('保存日记错误');
+            let msg = err.message || err.data.message || '保存日记错误';
+            message.error(msg);
             this.setState({
                 loading: false
             });
         }).catch((err) => {
-            message.error('保存日记错误');
+            let msg = err.message || err.data.message || '保存日记错误';
+            message.error(msg);
             this.setState({
                 loading: false
             });
