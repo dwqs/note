@@ -81,10 +81,6 @@ export  default  class Hello extends Component{
         }
     }
 
-    enterLoading = () => {
-        this.setState({ loading: true });
-    }
-
     render(){
         const { username, pwd } = this.state;
         const userNameSuffix = username ? <Icon type="close-circle" onClick={this.emitEmpty.bind(this, 1)} /> : null;

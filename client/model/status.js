@@ -6,6 +6,7 @@
 'use strict';
 
 import {observable, action, useStrict} from 'mobx';
+import {message} from 'antd';
 
 useStrict(true);
 
@@ -25,7 +26,7 @@ class UserStatus {
             }
         }, (err) => {
             this.changeStatus(false);
-            console.log('getLoginStatus err', err.status);
+            message.error('获取登录状态错误');
         })
     }
 

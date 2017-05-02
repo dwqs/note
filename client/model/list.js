@@ -6,6 +6,7 @@
 'use strict';
 
 import {observable, computed, action, useStrict} from 'mobx';
+import {message} from 'antd';
 
 useStrict(true);
 
