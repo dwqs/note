@@ -36,17 +36,7 @@ class UserStatus {
 
     @action
     userLogin(data){
-        api.login(data).then((res) => {
-            console.log('user login',res)
-            if(!res.code){
-                this.changeStatus(res.data.loginStatus);
-            } else {
-                this.changeStatus(false);
-            }
-        }, (err) => {
-            this.changeStatus(false);
-            console.log('userLogin err', err.status);
-        })
+        return api.login(data);
     }
 }
 

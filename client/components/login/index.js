@@ -8,9 +8,9 @@
 import './index.css';
 
 import React, {Component} from 'react';
+import { Input, Icon , Button, message} from 'antd';
 import {observer,inject} from 'mobx-react';
 
-//
 @inject('userStatus')
 @observer
 export  default  class Hello extends Component{
@@ -19,18 +19,41 @@ export  default  class Hello extends Component{
         super();
         this.state = {
             username: '',
-            pwd: ''
+            pwd: '',
+            loading: false
         }
     }
 
-    componentWillReact() {
-        console.log("I will re-render, since the todo has changed!");
-    }
-
     login = () => {
+        if(!this.state.username){
+            message.warning('请输入用户名');
+            return;
+        }
+        if(!this.state.pwd){
+            message.warning('请输入密码');
+            return;
+        }
+        this.setState({
+            loading: true
+        });
         this.props.userStatus.userLogin({
             username: this.state.username,
             pwd: this.state.pwd
+        }).then((res) => {
+            if(res.code){
+                message.error(res.data.message);
+                this.setState({
+                    loading: false
+                });
+            } else {
+                this.props.userStatus.changeStatus(true);
+                window.location = '/index';
+            }
+        }, (err) => {
+            message.error('登录出错');
+            this.setState({
+                loading: false
+            });
         })
     };
 
@@ -46,25 +69,50 @@ export  default  class Hello extends Component{
         })
     };
 
+    emitEmpty(type){
+        if(type === 1){
+            this.setState({
+                username: ''
+            })
+        } else {
+            this.setState({
+                pwd: ''
+            })
+        }
+    }
+
+    enterLoading = () => {
+        this.setState({ loading: true });
+    }
+
     render(){
+        const { username, pwd } = this.state;
+        const userNameSuffix = username ? <Icon type="close-circle" onClick={this.emitEmpty.bind(this, 1)} /> : null;
+        const pwdSuffix = pwd ? <Icon type="close-circle" onClick={this.emitEmpty.bind(this, 2)} /> : null;
+
         return (
             <div className="login">
-                <input type="text" placeholder="用户名" onInput={this.usernameChange}/>
-                <input type="password" placeholder="密码" onInput={this.pwdChange}/>
-                <button onClick={this.login}> 登录</button>
+                <div className="username">
+                    <Input
+                        suffix={userNameSuffix}
+                        value={username}
+                        onChange={this.usernameChange}
+                        prefix={<Icon type="user" style={{ fontSize: 13 }} />}
+                        placeholder="用户名" />
+                </div>
+                <div className="pwd">
+                    <Input
+                        suffix={pwdSuffix}
+                        prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
+                        type="password"
+                        value={pwd}
+                        onChange={this.pwdChange}
+                        placeholder="密码" />
+                </div>
+                <Button type="primary" loading={this.state.loading} onClick={this.login}>
+                    登录
+                </Button>
             </div>
         )
-    }
-
-    componentDidMount(){
-        if(this.props.userStatus.loginStatus){
-            window.location = '/index';
-        }
-    }
-
-    componentDidUpdate(){
-        if(this.props.userStatus.loginStatus){
-            window.location = '/index';
-        }
     }
 }
