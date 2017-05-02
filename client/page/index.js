@@ -13,6 +13,7 @@ import {Provider} from 'mobx-react';
 
 import list from '../model/list';
 import userStatus from '../model/status';
+import note from '../model/note';
 
 import App from '@components/app';
 import NewNote from '@components/new-note';
@@ -25,6 +26,7 @@ window.onload = function () {
         <Provider
             list = {list}
             userStatus = {userStatus}
+            note = {note}
         >
             <Router history={browserHistory}>
                 <Route path="/" component={App}>

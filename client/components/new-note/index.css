@@ -12,6 +12,24 @@
     padding: 15px 0;
 }
 
+.note-action{
+    margin: 15px 0;
+    text-align: center;
+}
+
+.note-cancel{
+    margin-left: 15px;
+}
+
+.note-public-check{
+    margin: 15px 0;
+}
+
+.note-title{
+    width: 500px;
+    margin: 15px 0;
+}
+
 .full-height{
     height: 100%
 }
