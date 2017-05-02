@@ -5,8 +5,8 @@
   "author": "dwqs",
   "license": "MIT",
   "repository": {
-      "type": "git",
-      "url": "git@github.com:dwqs/note.git"
+    "type": "git",
+    "url": "git@github.com:dwqs/note.git"
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development node --harmony ./server/index",
@@ -16,6 +16,7 @@
     "build": "cross-env NODE_ENV=production ./node_modules/.bin/gulp --gulpfile ./gulpfile.build.js build"
   },
   "dependencies": {
+    "antd": "^2.9.3",
     "axios": "^0.16.1",
     "babel-polyfill": "^6.23.0",
     "bluebird": "^3.5.0",
