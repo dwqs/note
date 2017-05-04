@@ -139,7 +139,7 @@ export default class NewNote extends Component{
             text: ''
         });
 
-        window.location = '/index';
+        window.location.href = '/index';
     };
 
     handleCancel = (e) => {

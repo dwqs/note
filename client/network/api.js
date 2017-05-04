@@ -31,5 +31,21 @@ export default {
             data: data
         });
         return res;
+    },
+
+    async getLatestNotes(data){
+        let res = await network.get({
+            url: '/note/latest',
+            data: data
+        });
+        return res;
+    },
+
+    async getNotesList(data){
+        let res = await network.get({
+            url: '/note/list',
+            data: data
+        });
+        return res;
     }
 };

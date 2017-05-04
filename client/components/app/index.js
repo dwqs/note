@@ -5,6 +5,7 @@
 'use strict';
 
 import 'antd/dist/antd.css';
+import './markdown.css';
 
 import React, {Component,PropTypes} from 'react';
 import {observer,inject} from 'mobx-react';

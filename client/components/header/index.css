@@ -18,14 +18,13 @@ header>div{
 
 .note-header .logo-text {
     top: 18px;
-    left: 25px;
     font-size: 28px;
     line-height: 29px;
 }
 
 .note-header .logo-text-desc {
     top: 18px;
-    left: 28px;
+    left: 18px;
     font-size: 12px;
     line-height: 12px;
 }

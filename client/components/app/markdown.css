@@ -1,0 +1,243 @@
+body{
+    background: #F0F1F5
+}
+
+/** markdown css **/
+
+.note-markdown-body{
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    font-family: "Microsoft YaHei",Helvetica,"Meiryo UI","Malgun Gothic","Segoe UI","Trebuchet MS",Monaco,monospace,Tahoma,STXihei,"华文细黑",STHeiti,"Helvetica Neue","Droid Sans","wenquanyi micro hei",FreeSans,Arimo,Arial,SimSun,"宋体",Heiti,"黑体",sans-serif;
+    word-wrap: break-word;
+    background-color: transparent;
+}
+
+.note-markdown-body *{
+    box-sizing: border-box;
+}
+
+.note-markdown-body h1, .note-markdown-body h2, .note-markdown-body h3,
+.note-markdown-body h4, .note-markdown-body h5, .note-markdown-body h6 {
+    position: relative;
+    margin-top: 1em;
+    margin-bottom: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.note-markdown-body h1, .note-markdown-body h2 {
+    padding-bottom: .3em;
+    border-bottom: 1px solid #eee;
+}
+
+.note-markdown-body h1{
+    font-size: 2.25em;
+    line-height: 1.2
+}
+
+.note-markdown-body h2{
+    font-size: 1.75em;
+    line-height: 1.225
+}
+
+.note-markdown-body h3{
+    font-size: 1.5em;
+    line-height: 1.43
+}
+
+.note-markdown-body h4{
+    font-size: 1.25em;
+}
+
+.note-markdown-body h5{
+    font-size: 1em;
+}
+
+.note-markdown-body h6{
+    font-size: 1em;
+    color: #777
+}
+
+.note-span-code{
+    margin-left: 5px;
+    margin-right: 4px;
+    border: 1px solid #ddd;
+    background: #f6f6f6;
+    padding: 3px;
+    border-radius: 3px;
+    color: #999;
+}
+
+.note-span-code::before{
+    letter-spacing: -.2em;
+    content: "\00a0";
+}
+
+.note-span-code::after{
+    box-sizing: border-box;
+}
+
+.note-markdown-body strong{
+    font-weight: 700;
+}
+
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    vertical-align: baseline;
+    position: relative;
+}
+
+sub {
+    bottom: -.25em;
+}
+
+sup{
+    top: -.5em;
+}
+
+abbr[title], dfn[title] {
+    color: #3BA03B;
+    cursor: help;
+    border-bottom: 1px dotted #777;
+}
+
+.note-markdown-body abbr{
+    background-color: #ffd
+}
+
+.note-markdown-body blockquote {
+    color: #666;
+    border-left: 4px solid #ddd;
+    padding-left: 20px;
+    margin-left: 0;
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.note-markdown-body a{
+    color: #4183c4;
+    text-decoration: none;
+}
+
+.note-markdown-body a:hover{
+    color: #1C71FE;
+    text-decoration: none;
+}
+
+.note-markdown-body img{
+    max-width: 100%;
+    box-sizing: border-box;
+    vertical-align: middle;
+    border: none;
+}
+
+.note-markdown-body ul,.note-markdown-body ol {
+    padding-left: 2em;
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+.note-markdown-body ul{
+    list-style: disc outside none;
+}
+
+.note-markdown-body ol{
+    list-style-type: decimal;
+}
+
+.note-markdown-body ul ul,.note-markdown-body ol ol,.note-markdown-body ul ol,.note-markdown-body ol ul{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.note-markdown-body table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: block;
+    width: 100%;
+    overflow: auto;
+    word-break: keep-all;
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+.note-markdown-body table thead{
+    display: table-header-group;
+    vertical-align: middle;
+}
+
+.note-markdown-body table th{
+    font-weight: 700;
+}
+
+.note-markdown-body table tbody{
+    display: table-row-group;
+}
+
+.note-markdown-body table tr{
+    display: table-row;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+}
+
+.note-markdown-body table tr:nth-child(2n) {
+    background-color: #f8f8f8;
+}
+
+.note-markdown-body table td,.note-markdown-body table th{
+    padding: 6px 13px;
+    border: 1px solid #ddd;
+}
+
+.note-markdown-body pre{
+    padding: 16px;
+    overflow: auto;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border-radius: 3px;
+    word-wrap: normal;
+    margin: 10px 0px;
+    font: 14px "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.note-code-keyword,.note-code-meta-keyword{
+    color: #a71d5d;
+}
+
+.note-code-string,.note-code-meta-string{
+    color: #183691;
+}
+
+.note-code-params,.note-code-meta,.note-code-tag{
+    color: #333;
+}
+
+.note-code-regexp,.note-code-built_in,.note-code-attribute,
+.note-code-selector-attr{
+    color: #0086b3;
+}
+
+.note-code-literal,.note-code-number{
+    color: #ec766c
+}
+
+.note-code-comment{
+    color: #969896;
+}
+
+.note-code-selector-tag,.note-code-name{
+    color: #63a35c;
+}
+
+.note-code-selector-class,.note-code-selector-pseudo,
+.note-code-selector-id,.note-code-attr,.note-code-title{
+    color: #795da3;
+}
+
+.note-code-meta {
+    color: #333
+}
