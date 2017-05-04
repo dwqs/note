@@ -1,12 +1,26 @@
-.desc{
-    color: blue;
+.note-main-wrap{
+    position: relative;
+    height: 100%;
+    width: 100%;
 }
 
-p{
-    margin: 20px;
+.note-main{
+    position: relative;
+    width: 960px;
+    height: auto;
+    margin: 0 auto;
+    box-sizing: border-box;
+    background: #FFF;
+    border: 1px solid red;
 }
 
-a{
-    color: red;
-    text-decoration: none;
+.note-main-loading{
+    position: relative;
+    margin: 25px 0;
+    text-align: center;
+}
+
+.note-main-loading img{
+    width: 53px;
+    height: 10px;
 }

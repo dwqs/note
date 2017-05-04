@@ -14,7 +14,7 @@ import hljs from 'highlight.js';
 
 const RadioGroup = Radio.Group;
 
-@inject('note')
+@inject('note', 'userStatus')
 @observer
 export default class NewNote extends Component{
     constructor (){
@@ -33,6 +33,12 @@ export default class NewNote extends Component{
         this.areaScroll = null;
         this.resDom = null;
         this.maxScroll = 0;
+    }
+
+    componentWillMount(){
+        if(!this.props.userStatus.loginStatus){
+            window.location.href = '/login';
+        }
     }
 
     valChange(e){

@@ -7,6 +7,7 @@
 import './index.css';
 
 import React, {Component} from 'react';
+import { Link} from 'react-router';
 
 export default class Header extends Component {
     constructor (){
@@ -14,6 +15,9 @@ export default class Header extends Component {
     }
 
     render (){
+
+        let status = this.props.loginStatus;
+
         return (
             <header>
                 <div>
@@ -24,6 +28,7 @@ export default class Header extends Component {
                     <div className="star-me">
                         <a href="https://github.com/dwqs/note" target="_blank">Star Me</a>
                     </div>
+                    <Link to="/new" className="note-new-anction" style={{display: status ? 'block' : 'none'}}>新建</Link>
                 </div>
             </header>
         );

@@ -58,3 +58,15 @@ header>div{
     color: #fff;
     background-color: #0084F1;
 }
+
+.note-new-anction{
+    position: absolute;
+    color: #FFF;
+    top: 16px;
+    font-size: 18px;
+    right: 150px;
+}
+
+.note-new-anction:hover{
+    color: #FFF;
+}
