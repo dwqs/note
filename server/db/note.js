@@ -11,13 +11,11 @@ let Schema = mongoose.Schema;
 let NoteSchema = new Schema({
     title: { type: String, required: true},              //标题
     content: { type: String},                            //内容
-    created_time: { type: Date, default: Date.now},      // 创建时间
-    updated_time: { type: Date, default: Date.now},      // 更新日期
     isPublic: { type: Boolean, default: true}
 }, {
     timestamps: {
-        createdAt: 'created_at',
-        updatedAt: 'updated_at'
+        createdAt: 'created_at',                         // 创建时间
+        updatedAt: 'updated_at'                          // 更新时间
     }
 });
 
