@@ -214,10 +214,18 @@ abbr[title], dfn[title] {
     border: none;
 }
 
-.note-markdown-body ul,.note-markdown-body ol{
+.note-markdown-body ul,.note-markdown-body ol {
     padding-left: 2em;
     margin-top: 0;
     margin-bottom: 16px;
+}
+
+.note-markdown-body ul{
+    list-style: disc outside none;
+}
+
+.note-markdown-body ol{
+    list-style-type: decimal;
 }
 
 .note-markdown-body ul ul,.note-markdown-body ol ol,.note-markdown-body ul ol,.note-markdown-body ol ul{

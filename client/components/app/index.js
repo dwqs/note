@@ -4,7 +4,6 @@
 
 'use strict';
 
-import './reset.css';
 import 'antd/dist/antd.css';
 
 import React, {Component,PropTypes} from 'react';
