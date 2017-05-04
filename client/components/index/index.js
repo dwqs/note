@@ -10,6 +10,8 @@ import React, {Component} from 'react';
 import { Link} from 'react-router';
 import {observer,inject} from 'mobx-react';
 
+import Header from '@components/header/index';
+
 @inject('list', 'userStatus')
 @observer
 export  default  class Hello extends Component{
@@ -39,6 +41,7 @@ export  default  class Hello extends Component{
         console.log('length',this.props.list.todos.length);
         return (
             <div className="desc">
+                <Header></Header>
                 <p>A simple template webpack 2 + react 15 + Koa 2 setup for projects</p>
                 <p><img src='/dist/images/logo.png' alt="logo"/></p>
                 <p>doc: <a href="https://github.com/dwqs/react-koa">react-koa</a></p>

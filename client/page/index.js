@@ -17,7 +17,7 @@ import note from '../model/note';
 
 import App from '@components/app';
 import NewNote from '@components/new-note';
-import Hello from '@components/hello';
+import Index from '@components/index/';
 import NotFound from '@components/not-found';
 import Login from '@components/login';
 
@@ -30,8 +30,8 @@ window.onload = function () {
         >
             <Router history={browserHistory}>
                 <Route path="/" component={App}>
-                    <IndexRoute component={Hello}/>
-                    <Route path="index" component={Hello}/>
+                    <IndexRoute component={Index}/>
+                    <Route path="index" component={Index}/>
                     <Route path="login" component={Login}/>
                     <Route path="new" component={NewNote}/>
                     <Route path="*" component={NotFound}/>

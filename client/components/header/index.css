@@ -1,0 +1,60 @@
+header {
+    height: 58px;
+    color: #FFFFFF;
+    background: #0084F1;
+}
+
+header>div{
+    position: relative;
+    width: 960px;
+    margin: 0 auto;
+}
+
+.note-header span {
+    display: inline-block;
+    position: relative;
+    font-family: '冬青黑体简体中文', 'Hiragino Sans GB', 'Tahama', 'Microsoft YaHei';
+}
+
+.note-header .logo-text {
+    top: 18px;
+    left: 25px;
+    font-size: 28px;
+    line-height: 29px;
+}
+
+.note-header .logo-text-desc {
+    top: 18px;
+    left: 28px;
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.star-me {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 58px;
+    width: 98px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.star-me a{
+    position: absolute;
+    top: 17px;
+    left: -10px;
+    width: 98px;
+    text-align: center;
+    color: #1abc9c;
+    font-weight: bold;
+    background: #fff;
+    transform: rotate(50deg);
+    padding: 5px 10px;
+    transition: all .5s;
+}
+
+.star-me a:hover{
+    color: #fff;
+    background-color: #0084F1;
+}
