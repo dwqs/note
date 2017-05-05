@@ -47,14 +47,25 @@ let deleteNote = async function (ctx) {
 let getLatestList = async function (ctx) {
     ctx.response.set('content-type', 'application/json;charset=utf-8');
 
+    let token = ctx.cookies.get('token');
     let {latestListSize} = ctx.request.query;
 
+    let res = [];
+
     try{
-        let res = await ctx.NoteModel.find({},{
-            noteId: 1,
-            title: 1,
-            _id: 0
-        }).sort({noteId: -1}).limit(parseInt(latestListSize));
+        if(token && helper.isAdmin(token)) {
+            res = await ctx.NoteModel.find({},{
+                noteId: 1,
+                title: 1,
+                _id: 0
+            }).sort({noteId: -1}).limit(parseInt(latestListSize));
+        } else {
+            res = await ctx.NoteModel.find({isPublic: true},{
+                noteId: 1,
+                title: 1,
+                _id: 0
+            }).sort({noteId: -1}).limit(parseInt(latestListSize));
+        }
 
         ctx.body = {
             code: 0,
@@ -75,12 +86,20 @@ let getLatestList = async function (ctx) {
 let getNotesList = async function (ctx) {
     ctx.response.set('content-type', 'application/json;charset=utf-8');
 
+    let token = ctx.cookies.get('token');
     let {curPage, pageSize} = ctx.request.query;
+    let res = [];
 
     try{
-        let res = await ctx.NoteModel.find({},{
-            _id: 0
-        }).sort({noteId: -1}).limit(parseInt(pageSize)).skip(parseInt((curPage - 1) * pageSize));
+        if(token && helper.isAdmin(token)) {
+            res = await ctx.NoteModel.find({},{
+                _id: 0
+            }).sort({noteId: -1}).limit(parseInt(pageSize)).skip(parseInt((curPage - 1) * pageSize));
+        } else {
+            res = await ctx.NoteModel.find({isPublic: true},{
+                _id: 0
+            }).sort({noteId: -1}).limit(parseInt(pageSize)).skip(parseInt((curPage - 1) * pageSize));
+        }
 
         ctx.body = {
             code: 0,
@@ -90,9 +109,9 @@ let getNotesList = async function (ctx) {
         }
     } catch (err) {
         ctx.body = {
-            code: 2004,
+            code: 2003,
             data: {
-                message: err.message || helper.getTypeByCode(2003)
+                message: err.message || helper.getTypeByCode(2004)
             }
         }
     }

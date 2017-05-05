@@ -4,6 +4,10 @@
 
 'use strict';
 
+let jwt = require('jsonwebtoken');
+
+let admin = require('../admin/users.json');
+
 let ignoreAuthPaths = [/\/new\/?/, /\/edit\/\d+\/?/, /\/note\/(save|delete|update)\/?/];
 let code2type = [{
     code: 2000,
@@ -48,5 +52,10 @@ module.exports = {
             }
         }
         return 'unknown type';
+    },
+
+    isAdmin: (token) => {
+        let decoded = jwt.verify(token, admin.privateKey);
+        return decoded === admin.token;
     }
 };
