@@ -78,6 +78,7 @@ export  default  class NoteDetail extends Component {
                             <h3 className="detail-title">
                                 <Link to={`/detail/${item && item.noteId}`}>
                                     {item && item.title}
+                                    {!item && '该日记不存在'}
                                 </Link>
                             </h3>
                             <div className="note-markdown-body detail-content" dangerouslySetInnerHTML={{__html: item && marked(item.content)}}></div>
@@ -85,7 +86,7 @@ export  default  class NoteDetail extends Component {
                                 <span className="detail-time">最后更新于: {dateHelper(item && item.updated_at)}</span>
                                 <ul className="detail-action-list">
                                     <li>
-                                        <Link to={`/detail/${item && item.noteId}`} style={{display: loginStatus ? 'inline-block' : 'none'}}>编辑</Link>
+                                        <Link to={`/edit/${item && item.noteId}`} style={{display: loginStatus ? 'inline-block' : 'none'}}>编辑</Link>
                                     </li>
                                 </ul>
                             </div>

@@ -145,10 +145,19 @@ let getNoteDetail = async function (ctx) {
     try {
         let res = await ctx.NoteModel.findOne({noteId: noteId}, {_id: 0});
 
-        ctx.body = {
-            code: 0,
-            data: {
-                note: res
+        if(!res){
+            ctx.body = {
+                code: 2007,
+                data: {
+                    message: helper.getTypeByCode(2007)
+                }
+            }
+        } else {
+            ctx.body = {
+                code: 0,
+                data: {
+                    note: res
+                }
             }
         }
     } catch (err) {

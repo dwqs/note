@@ -39,6 +39,7 @@ export default class NewNote extends Component{
         if(!this.props.status.loginStatus){
             window.location.href = '/login';
         }
+        console.log('11111NewNote', this.props.params.noteId)
     }
 
     valChange(e){

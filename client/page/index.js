@@ -35,6 +35,7 @@ window.onload = function () {
                     <Route path="index" component={Index}/>
                     <Route path="login" component={Login}/>
                     <Route path="detail/:noteId" component={NoteDetail}/>
+                    <Route path="edit/:noteId" component={NewNote}/>
                     <Route path="new" component={NewNote}/>
                     <Route path="*" component={NotFound}/>
                 </Route>

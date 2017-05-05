@@ -78,7 +78,7 @@ export  default  class Index extends Component{
                         <span className="item-time">{dateHelper(item.created_at)}</span>
                         <ul className="item-action-list">
                             <li>
-                                <Link to={`/detail/${item.noteId}`} style={{display: loginStatus ? 'inline-block' : 'none'}}>编辑</Link>
+                                <Link to={`/edit/${item.noteId}`} style={{display: loginStatus ? 'inline-block' : 'none'}}>编辑</Link>
                             </li>
                             <li>
                                 <span onClick={this.deleteNote(item.noteId, item.title)} style={{display: loginStatus ? 'inline-block' : 'none'}}>删除</span>
