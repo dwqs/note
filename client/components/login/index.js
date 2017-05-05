@@ -11,7 +11,7 @@ import React, {Component} from 'react';
 import { Input, Icon , Button, message} from 'antd';
 import {observer,inject} from 'mobx-react';
 
-@inject('userStatus')
+@inject('status')
 @observer
 export  default  class Hello extends Component{
 
@@ -36,7 +36,7 @@ export  default  class Hello extends Component{
         this.setState({
             loading: true
         });
-        this.props.userStatus.userLogin({
+        this.props.status.userLogin({
             username: this.state.username,
             pwd: this.state.pwd
         }).then((res) => {
@@ -46,7 +46,7 @@ export  default  class Hello extends Component{
                     loading: false
                 });
             } else {
-                this.props.userStatus.changeStatus(true);
+                this.props.status.changeStatus(true);
                 window.location = '/index';
             }
         }, (err) => {

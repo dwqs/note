@@ -55,5 +55,13 @@ export default {
             data: data
         });
         return res;
+    },
+
+    async getNoteDetailById(data){
+        let res = await network.get({
+            url: '/note/detail',
+            data: data
+        });
+        return res;
     }
 };

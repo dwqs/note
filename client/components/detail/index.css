@@ -1,0 +1,41 @@
+.note-detail-wrap{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background: #F0F1F5
+}
+
+.note-detail-wrap *{
+    box-sizing: border-box;
+}
+
+.text-clamp{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.detail-main{
+    position: relative;
+    width: 960px;
+    height: auto;
+    margin: 0 auto;
+    padding-top: 40px;
+    border: 1px solid red;
+}
+
+.detail-main:after{
+    content: '';
+    clear: both;
+    height: 0;
+    display: block;
+}
+
+.detail-main-left{
+    background: #FFF;
+    width: 645px;
+    display: inline-block;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}

@@ -137,9 +137,34 @@ let getNotesList = async function (ctx) {
     }
 };
 
+let getNoteDetail = async function (ctx) {
+    ctx.response.set('content-type', 'application/json;charset=utf-8');
+
+    let {noteId} = ctx.request.query;
+
+    try {
+        let res = await ctx.NoteModel.findOne({noteId: noteId}, {_id: 0});
+
+        ctx.body = {
+            code: 0,
+            data: {
+                note: res
+            }
+        }
+    } catch (err) {
+        ctx.body = {
+            code: 2006,
+            data: {
+                message: err.message || helper.getTypeByCode(2006)
+            }
+        }
+    }
+};
+
 module.exports.register = function (router) {
     router.get('/note/latest', getLatestList);
     router.get('/note/list', getNotesList);
+    router.get('/note/detail', getNoteDetail);
     router.post('/note/save', saveNote);
     router.post('/note/update', updateNote);
     router.post('/note/delete', deleteNote);

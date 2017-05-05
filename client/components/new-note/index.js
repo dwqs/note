@@ -14,7 +14,7 @@ import hljs from 'highlight.js';
 
 const RadioGroup = Radio.Group;
 
-@inject('note', 'userStatus')
+@inject('note', 'status')
 @observer
 export default class NewNote extends Component{
     constructor (){
@@ -36,7 +36,7 @@ export default class NewNote extends Component{
     }
 
     componentWillMount(){
-        if(!this.props.userStatus.loginStatus){
+        if(!this.props.status.loginStatus){
             window.location.href = '/login';
         }
     }

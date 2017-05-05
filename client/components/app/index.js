@@ -10,7 +10,7 @@ import './markdown.css';
 import React, {Component,PropTypes} from 'react';
 import {observer,inject} from 'mobx-react';
 
-@inject('userStatus')
+@inject('status', 'list')
 @observer
 export  default  class Hello extends Component{
     constructor (){
@@ -18,7 +18,9 @@ export  default  class Hello extends Component{
     }
 
     componentWillMount(){
-        this.props.userStatus.queryLoginStatus();
+        this.props.status.queryLoginStatus();
+        this.props.list.getLatestNotes();
+        this.props.list.getNoteList();
     }
 
     render(){

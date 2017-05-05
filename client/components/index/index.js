@@ -15,12 +15,13 @@ import {observable} from 'mobx';
 import {message, Modal, Button} from 'antd';
 
 import Header from '@components/header/index';
+import RightList from '@components/right-list/index';
 
 import {dateHelper} from '../../lib/index';
 
 const EXP = /(<h[1-6].*>\.*.*<\/h[1-6]>|<p.*>\.*.*<\/p>)/g;
 
-@inject('list', 'userStatus')
+@inject('list', 'status')
 @observer
 export  default  class Index extends Component{
     constructor (){
@@ -34,8 +35,7 @@ export  default  class Index extends Component{
     }
 
     componentWillMount(){
-        this.props.list.getLatestNotes();
-        this.props.list.getNoteList();
+
     }
 
     cutSumary = (html) =>{
@@ -61,25 +61,8 @@ export  default  class Index extends Component{
         }
     }
 
-    renderLatestList(data) {
-        const {latestLoading} = this.props.list;
-        let list = data.map((item) => {
-            return (
-                <li className="right-list-item" key={item.noteId}>
-                    <Link to={`/detail/${item.noteId}`} className="text-clamp">{item.title}</Link>
-                </li>
-            )
-        });
-
-        return (
-            <ul className="note-list" style={{display: latestLoading ? 'none' : 'block', marginBottom: "10px"}}>
-                {list.length ? list : <p>暂无数据</p>}
-            </ul>
-        );
-    }
-
     renderNoteList(data){
-        const {loginStatus} = this.props.userStatus;
+        const {loginStatus} = this.props.status;
         const {noteListLoading} = this.props.list;
 
         let list = data.map((item) => {
@@ -165,12 +148,12 @@ export  default  class Index extends Component{
 
         const {noteList, latestList, noteListLoading, latestLoading} = this.props.list;
 
-        let latestNoteList = this.renderLatestList(observable(latestList).slice());
+        //let latestNoteList = this.renderLatestList(observable(latestList).slice());
         let notesList = this.renderNoteList(observable(noteList).slice());
 
         return (
             <div className="note-main-wrap">
-                <Header loginStatus={this.props.userStatus.loginStatus}></Header>
+                <Header loginStatus={this.props.status.loginStatus}></Header>
                 <Modal title="删除日记"
                        visible={this.state.visible}
                        onOk={this.handleOk}
@@ -193,13 +176,7 @@ export  default  class Index extends Component{
                             <img src="http://onasvjoyz.bkt.clouddn.com/loading.gif" />
                         </div>
                     </div>
-                    <div className="note-main-right">
-                        <h2 className="right-title">最新日记</h2>
-                        {latestNoteList}
-                        <div className="note-main-loading" style={{display: latestLoading ? 'block' : 'none'}}>
-                            <img src="http://onasvjoyz.bkt.clouddn.com/loading.gif" />
-                        </div>
-                    </div>
+                    <RightList latestLoading={latestLoading} latestList={observable(latestList).slice()}></RightList>
                 </div>
             </div>
         )

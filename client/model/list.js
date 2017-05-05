@@ -97,6 +97,13 @@ class List {
             return item.noteId !== noteId
         });
     }
+
+    @action
+    getNoteDetail(noteId){
+        return api.getNoteDetailById({
+            noteId: noteId
+        })
+    }
 }
 
 let list = new List(1, 15, 5);
