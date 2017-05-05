@@ -34,6 +34,7 @@ Open your browser to visit `localhost:3000`, have fun.
 * Mongodb v3.4.2
 * React 15
 * Mobx 3
+* Webpack 2
 
 ## License
 
