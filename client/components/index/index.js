@@ -147,8 +147,6 @@ export  default  class Index extends Component{
     render(){
 
         const {noteList, latestList, noteListLoading, latestLoading} = this.props.list;
-
-        //let latestNoteList = this.renderLatestList(observable(latestList).slice());
         let notesList = this.renderNoteList(observable(noteList).slice());
 
         return (

@@ -12,8 +12,10 @@ import marked from 'marked';
 import { Link} from 'react-router';
 import hljs from 'highlight.js';
 import {message} from 'antd';
+import {observable} from 'mobx';
 
 import Header from '@components/header/index';
+import RightList from '@components/right-list/index';
 
 import {dateHelper} from '../../lib/index';
 
@@ -23,7 +25,7 @@ export  default  class NoteDetail extends Component {
     constructor() {
         super();
         this.state = {
-            loading: false,
+            loading: true,
             note: null
         };
     }
@@ -63,12 +65,36 @@ export  default  class NoteDetail extends Component {
 
     render() {
 
+        const { latestList, latestLoading} = this.props.list;
+        const item = this.state.note;
+        const loginStatus = this.props.status.loginStatus;
+
         return (
             <div className="note-detail-wrap">
-                <Header loginStatus={this.props.status.loginStatus}></Header>
+                <Header loginStatus={loginStatus}></Header>
                 <div className="detail-main">
-                    <div className="detail-main-left"></div>
-                    <div className="detail-main-right"></div>
+                    <div className="detail-main-left">
+                        <div className="detail-content-wrap" style={{display: this.state.loading ? 'none' : 'block'}}>
+                            <h3 className="detail-title">
+                                <Link to={`/detail/${item && item.noteId}`}>
+                                    {item && item.title}
+                                </Link>
+                            </h3>
+                            <div className="detail-content" dangerouslySetInnerHTML={{__html: item && marked(item.content)}}></div>
+                            <div className="detail-meta">
+                                <span className="detail-time">最后更新于: {dateHelper(item && item.updated_at)}</span>
+                                <ul className="detail-action-list">
+                                    <li>
+                                        <Link to={`/detail/${item && item.noteId}`} style={{display: loginStatus ? 'inline-block' : 'none'}}>编辑</Link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="note-main-loading" style={{display: this.state.loading ? 'block' : 'none'}}>
+                            <img src="http://onasvjoyz.bkt.clouddn.com/loading.gif" />
+                        </div>
+                    </div>
+                    <RightList latestLoading={latestLoading} latestList={observable(latestList).slice()}></RightList>
                 </div>
             </div>
         )
