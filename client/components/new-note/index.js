@@ -121,6 +121,7 @@ export default class NewNote extends Component{
                         visible: false
                     });
                     message.success('日记保存成功');
+                    window.location.href = `/detail/${res.data.id}`;
                 }
             }, (err) => {
                 let msg = err.message || (err.data && err.data.message) || '保存日记错误';
@@ -154,6 +155,7 @@ export default class NewNote extends Component{
                         visible: false
                     });
                     message.success('日记更新成功');
+                    window.location.href = `/detail/${this.props.params.noteId}`;
                 }
             }, (err) => {
                 let msg = err.message || (err.data && err.data.message) || '更新日记错误';
