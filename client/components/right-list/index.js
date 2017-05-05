@@ -20,7 +20,7 @@ export default class RightList extends Component{
         let list = data.map((item) => {
             return (
                 <li className="right-list-item" key={item.noteId}>
-                    <Link to={`/detail/${item.noteId}`} className="text-clamp">{item.title}</Link>
+                    <Link to={`/detail/${item.noteId}`} className="text-clamp" target="_blank">{item.title}</Link>
                 </li>
             )
         });

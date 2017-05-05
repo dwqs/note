@@ -38,6 +38,35 @@ let saveNote = async function (ctx,next) {
 
 let updateNote = async function (ctx) {
     ctx.response.set('content-type', 'application/json;charset=utf-8');
+
+    let {noteId, title, content, isPublic} = ctx.request.body;
+
+    try {
+        let res = await ctx.NoteModel.updateOne(
+                {noteId: noteId},
+                {$set:{title: title, content: content, isPublic: isPublic}}
+            );
+        if(!res){
+            ctx.body = {
+                code: 2008,
+                data: {
+                    message: helper.getTypeByCode(2008)
+                }
+            }
+        } else {
+            ctx.body = {
+                code: 0,
+                data: {}
+            }
+        }
+    } catch (err) {
+        ctx.body = {
+            code: 2005,
+            data: {
+                message: err.message || helper.getTypeByCode(2005)
+            }
+        }
+    }
 };
 
 let deleteNote = async function (ctx) {

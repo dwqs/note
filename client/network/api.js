@@ -33,6 +33,14 @@ export default {
         return res;
     },
 
+    async updateNote(data){
+        let res = await network.post({
+            url: '/note/update',
+            data: data
+        });
+        return res;
+    },
+
     async getLatestNotes(data){
         let res = await network.get({
             url: '/note/latest',

@@ -14,7 +14,7 @@ import hljs from 'highlight.js';
 
 const RadioGroup = Radio.Group;
 
-@inject('note', 'status')
+@inject('note', 'status', 'list')
 @observer
 export default class NewNote extends Component{
     constructor (){
@@ -39,7 +39,29 @@ export default class NewNote extends Component{
         if(!this.props.status.loginStatus){
             window.location.href = '/login';
         }
-        console.log('11111NewNote', this.props.params.noteId)
+
+        //编辑
+        if(this.props.params.noteId) {
+            this.props.list.getNoteDetail(parseInt(this.props.params.noteId))
+                .then((res) => {
+                    if(res.code){
+                        message.error(res.data.message);
+                    } else {
+                        this.setState({
+                            __html: marked(res.data.note.content),
+                            text: res.data.note.content,
+                            title: res.data.note.title,
+                            isPublic: res.data.note.isPublic
+                        })
+                    }
+                }, (err) => {
+                    let msg = err.message || (err.data && err.data.message) || '获取日志详情失败';
+                    message.error(msg);
+                }).catch((err) => {
+                    let msg = err.message || (err.data && err.data.message) || '获取日志详情失败';
+                    message.error(msg);
+            })
+        }
     }
 
     valChange(e){
@@ -81,37 +103,72 @@ export default class NewNote extends Component{
             loading: true
         });
 
-        this.props.note.saveNote({
-            title: this.state.title,
-            content: this.state.text,
-            isPublic: this.state.isPublic
-        }).then((res) => {
-            if(res.code){
-                message.error(res.data.message);
-            } else {
+        if(!this.props.params.noteId){
+            this.props.note.saveNote({
+                title: this.state.title,
+                content: this.state.text,
+                isPublic: this.state.isPublic
+            }).then((res) => {
+                if(res.code){
+                    message.error(res.data.message);
+                } else {
+                    this.setState({
+                        loading: false,
+                        __html: '',
+                        text: '',
+                        title: '',
+                        isPublic: true,
+                        visible: false
+                    });
+                    message.success('日记保存成功');
+                }
+            }, (err) => {
+                let msg = err.message || (err.data && err.data.message) || '保存日记错误';
+                message.error(msg);
                 this.setState({
-                    loading: false,
-                    __html: '',
-                    text: '',
-                    title: '',
-                    isPublic: true,
-                    visible: false
+                    loading: false
                 });
-                message.success('日记保存成功');
-            }
-        }, (err) => {
-            let msg = err.message || (err.data && err.data.message) || '保存日记错误';
-            message.error(msg);
-            this.setState({
-                loading: false
-            });
-        }).catch((err) => {
-            let msg = err.message || (err.data && err.data.message) || '保存日记错误';
-            message.error(msg);
-            this.setState({
-                loading: false
-            });
-        })
+            }).catch((err) => {
+                let msg = err.message || (err.data && err.data.message) || '保存日记错误';
+                message.error(msg);
+                this.setState({
+                    loading: false
+                });
+            })
+        } else {
+            this.props.note.updateNote({
+                noteId: parseInt(this.props.params.noteId),
+                title: this.state.title,
+                content: this.state.text,
+                isPublic: this.state.isPublic
+            }).then((res) => {
+                if(res.code){
+                    message.error(res.data.message);
+                } else {
+                    this.setState({
+                        loading: false,
+                        __html: '',
+                        text: '',
+                        title: '',
+                        isPublic: true,
+                        visible: false
+                    });
+                    message.success('日记更新成功');
+                }
+            }, (err) => {
+                let msg = err.message || (err.data && err.data.message) || '更新日记错误';
+                message.error(msg);
+                this.setState({
+                    loading: false
+                });
+            }).catch((err) => {
+                let msg = err.message || (err.data && err.data.message) || '更新日记错误';
+                message.error(msg);
+                this.setState({
+                    loading: false
+                });
+            })
+        }
     };
 
     cancelSaveNote = () => {
@@ -157,13 +214,16 @@ export default class NewNote extends Component{
             { label: '不公开', value: false }
         ];
 
+        let m = this.props.params.noteId ? '取消更新日记' : '取消保存日记';
+
         return (
             <div className="new-note full-height">
                 <div className="new-note-body full-height">
-                    <Modal title="取消保存日记" visible={this.state.visible}
+                    <Modal title={m} visible={this.state.visible}
                            onOk={this.handleOk} onCancel={this.handleCancel}
                     >
-                        <p>确定取消保存日记吗？</p>
+                        <p>
+                            {this.props.params.noteId ? '确定取消更新日记吗？' : '确定取消保存日记吗？'}</p>
                     </Modal>
                     <div className="note-title">
                         <Input
@@ -185,10 +245,10 @@ export default class NewNote extends Component{
                     </div>
                     <div className="note-action">
                         <Button type="primary" loading={this.state.loading} onClick={this.saveNote}>
-                            保存
+                            {this.props.params.noteId ? '更新' : '保存'}
                         </Button>
                         <Button onClick={this.cancelSaveNote} className="note-cancel">
-                            取消保存
+                            {this.props.params.noteId ? '取消更新' : '取消保存'}
                         </Button>
                     </div>
                 </div>

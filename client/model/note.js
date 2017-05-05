@@ -12,12 +12,6 @@ useStrict(true);
 import api from '../network/api';
 
 class Note {
-    @observable
-    id = -1;
-
-    @computed get getId(){
-        return this.id;
-    }
 
     @action
     saveNote(data){
@@ -25,8 +19,8 @@ class Note {
     }
 
     @action
-    changeId(noteId) {
-        this.id = noteId;
+    updateNote(data){
+        return api.updateNote(data);
     }
 }
 
