@@ -17,6 +17,8 @@ header>div{
 }
 
 .note-header .logo-text {
+    color: #FFF;
+    position: relative;
     top: 18px;
     font-size: 28px;
     line-height: 29px;

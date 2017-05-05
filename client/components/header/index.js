@@ -22,7 +22,7 @@ export default class Header extends Component {
             <header>
                 <div>
                     <div className="note-header">
-                        <span className="logo-text">Note</span>
+                        <a href="/index" className="logo-text">Note</a>
                         <span className="logo-text-desc">write what you want</span>
                     </div>
                     <div className="star-me">
