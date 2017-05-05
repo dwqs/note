@@ -16,6 +16,8 @@ import {message, Modal} from 'antd';
 
 import Header from '@components/header/index';
 
+import {dateHelper} from '../../lib/index';
+
 const EXP = /(<h[1-6].*>\.*.*<\/h[1-6]>|<p.*>\.*.*<\/p>)/g;
 
 @inject('list', 'userStatus')
@@ -73,7 +75,7 @@ export  default  class Hello extends Component{
                     </h3>
                     <div className="item-summary" dangerouslySetInnerHTML={{__html: this.cutSumary(marked(item.content))}}></div>
                     <div className="item-meta">
-                        <span className="item-time"> 时间</span>
+                        <span className="item-time">{dateHelper(item.created_at)}</span>
                         <ul className="item-action-list">
                             <li>
                                 <Link to={`/detail/${item.noteId}`} style={{display: loginStatus ? 'inline-block' : 'none'}}>编辑</Link>
