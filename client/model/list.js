@@ -16,7 +16,8 @@ class List {
     @observable noteList = [];
     @observable latestList = [];
     @observable latestLoading = true;
-    @observable noteListLoading: true;
+    @observable noteListLoading = true;
+    hasNext = 0;
     curPage = 0;
     pageSize = 0;
     latestListSize = 0;
@@ -76,9 +77,20 @@ class List {
             this.latestList = list;
             this.latestLoading = status;
         } else {
-            this.noteList = list;
+            if(list.length){
+                this.hasNext = 1;
+                this.noteList = [].concat(observable(this.noteList).slice(), list);
+                this.curPage++;
+            } else {
+                this.hasNext = 0;
+            }
             this.noteListLoading = status;
         }
+    }
+
+    @action
+    changeLoadingStatus(){
+        this.noteListLoading = true;
     }
 
     @action
@@ -106,6 +118,6 @@ class List {
     }
 }
 
-let list = new List(1, 15, 5);
+let list = new List(1, 7, 5);
 
 export default list;

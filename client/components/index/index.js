@@ -7,6 +7,7 @@
 import './index.css';
 
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import { Link} from 'react-router';
 import marked from 'marked';
 import hljs from 'highlight.js';
@@ -93,7 +94,7 @@ export  default  class Index extends Component{
         });
 
         return (
-            <ul className="note-list" style={{display: noteListLoading ? 'none' : 'block'}}>
+            <ul className="note-list" style={{display: !list.length && noteListLoading ? 'none' : 'block'}}>
                 {list.length ? list : <p>暂无数据</p>}
             </ul>
         );
@@ -146,7 +147,8 @@ export  default  class Index extends Component{
 
     render(){
 
-        const {noteList, latestList, noteListLoading, latestLoading} = this.props.list;
+        const {noteList, latestList, noteListLoading, latestLoading, hasNext} = this.props.list;
+        const l = observable(noteList).slice().length;
         let notesList = this.renderNoteList(observable(noteList).slice());
 
         return (
@@ -167,12 +169,15 @@ export  default  class Index extends Component{
                 </Modal>
                 <div className="note-main">
                     <div className="note-main-left">
-                        <div className="note-list-wrap" style={{display: noteListLoading ? 'none' : 'block'}}>
+                        <div className="note-list-wrap" style={{display: !l && noteListLoading ? 'none' : 'block'}}>
                             {notesList}
                         </div>
                         <div className="note-main-loading" style={{display: noteListLoading ? 'block' : 'none'}}>
                             <img src="http://onasvjoyz.bkt.clouddn.com/loading.gif" />
                         </div>
+                        {
+                            (!noteListLoading && !hasNext) && <div className="note-main-loading">没有更多数据了</div>
+                        }
                     </div>
                     <RightList latestLoading={latestLoading} latestList={observable(latestList).slice()}></RightList>
                 </div>
@@ -206,5 +211,15 @@ export  default  class Index extends Component{
                 return hljs.highlightAuto(code).value;
             }
         });
+
+        document.addEventListener('scroll', (e) => {
+            let triggerNextMinHeight = document.body.scrollHeight - document.body.clientHeight - document.body.scrollTop;
+            if(triggerNextMinHeight < 23){
+                if(!this.props.list.noteListLoading && this.props.list.hasNext){
+                    this.props.list.changeLoadingStatus();
+                    this.props.list.getNoteList();
+                }
+            }
+        }, false)
     }
 }
