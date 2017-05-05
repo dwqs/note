@@ -25,6 +25,9 @@ let code2type = [{
     code: 2004,
     type: '获取日记列表失败'
 },{
+    code: 2005,
+    type: '删除日记失败'
+},{
     code: 404,
     type: '请求的路径不存在'
 },{

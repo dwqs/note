@@ -95,15 +95,17 @@
     display: inline-block;
 }
 
-.item-action-list li a{
+.item-action-list li a, .item-action-list li span{
     position: relative;
     color: #999;
     padding: 0 5px;
     display: inline-block;
+    cursor: pointer;
 }
 
-.item-action-list li a:hover{
+.item-action-list li a:hover, .item-action-list li span:hover{
     color: #108ee9;
+    cursor: pointer;
 }
 
 .note-main-right{

@@ -80,6 +80,23 @@ class List {
             this.noteListLoading = status;
         }
     }
+
+    @action
+    deleteNoteById(noteId) {
+        return api.deleteNote({
+            noteId: noteId
+        });
+    }
+
+    @action
+    updateNotesList(noteId) {
+        this.noteList = observable(this.noteList).slice().filter((item) => {
+            return item.noteId !== noteId
+        });
+        this.latestList = observable(this.latestList).slice().filter((item) => {
+            return item.noteId !== noteId
+        });
+    }
 }
 
 let list = new List(1, 15, 5);

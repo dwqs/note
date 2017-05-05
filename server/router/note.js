@@ -42,6 +42,26 @@ let updateNote = async function (ctx) {
 
 let deleteNote = async function (ctx) {
     ctx.response.set('content-type', 'application/json;charset=utf-8');
+
+    let {noteId} = ctx.request.body;
+
+    try {
+        let res = await ctx.NoteModel.deleteOne({noteId: noteId});
+
+        ctx.body = {
+            code: 0,
+            data: {
+                isDelete: res.result.ok
+            }
+        }
+    } catch (err) {
+        ctx.body = {
+            code: 2005,
+            data: {
+                message: err.message || helper.getTypeByCode(2005)
+            }
+        }
+    }
 };
 
 let getLatestList = async function (ctx) {
@@ -122,5 +142,5 @@ module.exports.register = function (router) {
     router.get('/note/list', getNotesList);
     router.post('/note/save', saveNote);
     router.post('/note/update', updateNote);
-    router.delete('/note/delete', deleteNote);
+    router.post('/note/delete', deleteNote);
 };

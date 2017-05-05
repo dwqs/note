@@ -12,7 +12,7 @@ import marked from 'marked';
 import hljs from 'highlight.js';
 import {observer,inject} from 'mobx-react';
 import {observable} from 'mobx';
-import {message, Modal} from 'antd';
+import {message, Modal, Button} from 'antd';
 
 import Header from '@components/header/index';
 
@@ -26,7 +26,10 @@ export  default  class Hello extends Component{
     constructor (){
         super();
         this.state = {
-            visible: false
+            visible: false,
+            modalContent: '',
+            noteId: -1,
+            loading: false
         };
     }
 
@@ -41,8 +44,22 @@ export  default  class Hello extends Component{
             return '<p>没有摘要</p>';
         }
 
+        if(matchedArr.length > 5){
+            matchedArr[4] = matchedArr[4] + '...';
+        }
+
         return matchedArr.length > 5 ? matchedArr.slice(0, 5).join('') : matchedArr.join('');
     };
+
+    deleteNote(noteId, title) {
+        return () => {
+            this.setState({
+                visible: true,
+                modalContent: title,
+                noteId: noteId
+            })
+        }
+    }
 
     renderLatestList(data) {
         const {latestLoading} = this.props.list;
@@ -81,7 +98,7 @@ export  default  class Hello extends Component{
                                 <Link to={`/detail/${item.noteId}`} style={{display: loginStatus ? 'inline-block' : 'none'}}>编辑</Link>
                             </li>
                             <li>
-                                <Link to="javascript:void 0;" style={{display: loginStatus ? 'inline-block' : 'none'}}>删除</Link>
+                                <span onClick={this.deleteNote(item.noteId, item.title)} style={{display: loginStatus ? 'inline-block' : 'none'}}>删除</span>
                             </li>
                             <li>
                                 <Link to={`/detail/${item.noteId}`}>阅读全文</Link>
@@ -99,6 +116,51 @@ export  default  class Hello extends Component{
         );
     }
 
+    handleOk = (e) => {
+        this.setState({
+            loading: true
+        });
+        this.props.list.deleteNoteById(this.state.noteId)
+            .then((res) => {
+                if(res.data.isDelete){
+                    this.props.list.updateNotesList(this.state.noteId);
+                    this.setState({
+                        visible: false,
+                        modalContent: '',
+                        noteId: -1,
+                        loading: false
+                    });
+                } else {
+                    let msg = '删除日记出错';
+                    message.error(msg);
+                    this.setState({
+                        loading: false
+                    });
+                }
+            }, (err) => {
+                let msg = err.message || (err.data && err.data.message) || '删除日记出错';
+                message.error(msg);
+                this.setState({
+                    loading: false
+                });
+            })
+            .catch((err) => {
+                let msg = err.message || (err.data && err.data.message) || '删除日记出错';
+                message.error(msg);
+                this.setState({
+                    loading: false
+                });
+            });
+    };
+
+    handleCancel = (e) => {
+        this.setState({
+            visible: false,
+            modalContent: '',
+            noteId: -1
+        });
+    };
+
     render(){
 
         const {noteList, latestList, noteListLoading, latestLoading} = this.props.list;
@@ -109,6 +171,19 @@ export  default  class Hello extends Component{
         return (
             <div className="note-main-wrap">
                 <Header loginStatus={this.props.userStatus.loginStatus}></Header>
+                <Modal title="删除日记"
+                       visible={this.state.visible}
+                       onOk={this.handleOk}
+                       onCancel={this.handleCancel}
+                       footer={[
+                           <Button key="back" size="large" onClick={this.handleCancel}>取消删除</Button>,
+                           <Button key="submit" type="primary" size="large" loading={this.state.loading} onClick={this.handleOk}>
+                               确认删除
+                           </Button>,
+                       ]}
+                >
+                    <p>{`确定删除「${this.state.modalContent}」?`}</p>
+                </Modal>
                 <div className="note-main">
                     <div className="note-main-left">
                         <div className="note-list-wrap" style={{display: noteListLoading ? 'none' : 'block'}}>

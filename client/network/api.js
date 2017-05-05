@@ -47,5 +47,13 @@ export default {
             data: data
         });
         return res;
+    },
+
+    async deleteNote(data){
+        let res = await network.post({
+            url: '/note/delete',
+            data: data
+        });
+        return res;
     }
 };
