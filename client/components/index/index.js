@@ -22,7 +22,7 @@ const EXP = /(<h[1-6].*>\.*.*<\/h[1-6]>|<p.*>\.*.*<\/p>)/g;
 
 @inject('list', 'userStatus')
 @observer
-export  default  class Hello extends Component{
+export  default  class Index extends Component{
     constructor (){
         super();
         this.state = {
