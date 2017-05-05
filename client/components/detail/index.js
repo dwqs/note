@@ -80,7 +80,7 @@ export  default  class NoteDetail extends Component {
                                     {item && item.title}
                                 </Link>
                             </h3>
-                            <div className="detail-content" dangerouslySetInnerHTML={{__html: item && marked(item.content)}}></div>
+                            <div className="note-markdown-body detail-content" dangerouslySetInnerHTML={{__html: item && marked(item.content)}}></div>
                             <div className="detail-meta">
                                 <span className="detail-time">最后更新于: {dateHelper(item && item.updated_at)}</span>
                                 <ul className="detail-action-list">
