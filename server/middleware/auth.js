@@ -19,7 +19,7 @@ module.exports = async function (ctx, next) {
             ctx.throw(401, helper.getTypeByCode(401));
         } else {
             let decoded = jwt.verify(token, admin.privateKey);
-            console.log('=======auth======', decoded === admin.token)
+
             if(decoded !== admin.token){
                 ctx.throw(2001, helper.getTypeByCode(2001));
             }

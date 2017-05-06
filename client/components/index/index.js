@@ -7,7 +7,6 @@
 import './index.css';
 
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import { Link} from 'react-router';
 import marked from 'marked';
 import hljs from 'highlight.js';
@@ -115,11 +114,18 @@ export  default  class Index extends Component{
                         loading: false
                     });
                 } else {
-                    let msg = '删除日记出错';
-                    message.error(msg);
-                    this.setState({
-                        loading: false
-                    });
+                    if(res.code === 401 || res.code === 2001){
+                        message.error('认证出错或者 token 失效, 请登录', 2000);
+                        setTimeout(() => {
+                            window.location.href = '/login';
+                        }, 2000)
+                    } else {
+                        let msg = '删除日记出错';
+                        message.error(msg);
+                        this.setState({
+                            loading: false
+                        });
+                    }
                 }
             }, (err) => {
                 let msg = err.message || (err.data && err.data.message) || '删除日记出错';

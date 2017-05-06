@@ -72,6 +72,7 @@ let updateNote = async function (ctx) {
 let deleteNote = async function (ctx) {
     ctx.response.set('content-type', 'application/json;charset=utf-8');
 
+    let token = ctx.cookies.get('token');
     let {noteId} = ctx.request.body;
 
     try {

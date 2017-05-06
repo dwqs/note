@@ -8,7 +8,7 @@ let jwt = require('jsonwebtoken');
 
 let admin = require('../admin/users.json');
 
-let ignoreAuthPaths = [/\/new\/?/, /\/edit\/\d+\/?/, /\/note\/(save|delete|update)\/?/];
+let needAuthPaths = [/\/new\/?/, /\/edit\/\d+\/?/, /\/note\/(save|delete|update)\/?/];
 let code2type = [{
     code: 2000,
     type: '用户名或者密码错误'
@@ -49,8 +49,8 @@ let code2type = [{
 
 module.exports = {
     isNeedAuth: (path) => {
-        for(let item in ignoreAuthPaths){
-            if(ignoreAuthPaths[item].test(path)){
+        for(let item in needAuthPaths){
+            if(needAuthPaths[item].test(path)){
                 return true;
             }
         }

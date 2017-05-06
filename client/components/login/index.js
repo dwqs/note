@@ -47,7 +47,7 @@ export  default  class Hello extends Component{
                 });
             } else {
                 this.props.status.changeStatus(true);
-                window.location = '/index';
+                window.location.href = '/index';
             }
         }, (err) => {
             let msg = err.message || '登录出错';
