@@ -228,7 +228,7 @@ export  default  class Index extends Component{
             }
         });
 
-        document.addEventListener('scroll', this.scrollListener, false)
+        document.addEventListener('scroll', this.scrollListener.bind(this), false)
     }
 
     componentWillUnmount(){
