@@ -169,6 +169,7 @@ let getNotesList = async function (ctx) {
 let getNoteDetail = async function (ctx) {
     ctx.response.set('content-type', 'application/json;charset=utf-8');
 
+    let token = ctx.cookies.get('token');
     let {noteId} = ctx.request.query;
 
     try {
@@ -182,10 +183,28 @@ let getNoteDetail = async function (ctx) {
                 }
             }
         } else {
-            ctx.body = {
-                code: 0,
-                data: {
-                    note: res
+            if(res.isPublic){
+                ctx.body = {
+                    code: 0,
+                    data: {
+                        note: res
+                    }
+                }
+            } else {
+                if(token && helper.isAdmin(token)){
+                    ctx.body = {
+                        code: 0,
+                        data: {
+                            note: res
+                        }
+                    }
+                } else {
+                    ctx.body = {
+                        code: 2007,
+                        data: {
+                            message: helper.getTypeByCode(2007)
+                        }
+                    }
                 }
             }
         }
