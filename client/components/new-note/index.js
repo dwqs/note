@@ -42,7 +42,7 @@ export default class NewNote extends Component{
         }
 
         //编辑
-        if(this.props.params.noteId) {
+        if(/^\d+$/.test(this.props.params.noteId)) {
             this.props.list.getNoteDetail(parseInt(this.props.params.noteId))
                 .then((res) => {
                     if(res.code){
@@ -111,7 +111,14 @@ export default class NewNote extends Component{
                 isPublic: this.state.isPublic
             }).then((res) => {
                 if(res.code){
-                    message.error(res.data.message);
+                    if(res.code === 401 || res.code === 2001){
+                        message.error('认证出错或者 token 失效, 请登录', 2000);
+                        setTimeout(() => {
+                            window.location.href = '/login';
+                        }, 2000)
+                    } else {
+                        message.error(res.data.message);
+                    }
                 } else {
                     this.setState({
                         loading: false,
@@ -122,7 +129,8 @@ export default class NewNote extends Component{
                         visible: false
                     });
                     message.success('日记保存成功');
-                    browserHistory.push(`/detail/${res.data.id}`);
+                    this.props.list.addNewNoteToList(0,res.data.item);
+                    browserHistory.replace(`/detail/${res.data.item.noteId}`);
                 }
             }, (err) => {
                 let msg = err.message || (err.data && err.data.message) || '保存日记错误';
@@ -145,7 +153,14 @@ export default class NewNote extends Component{
                 isPublic: this.state.isPublic
             }).then((res) => {
                 if(res.code){
-                    message.error(res.data.message);
+                    if(res.code === 401 || res.code === 2001){
+                        message.error('认证出错或者 token 失效, 请登录', 2000);
+                        setTimeout(() => {
+                            window.location.href = '/login';
+                        }, 2000)
+                    } else {
+                        message.error(res.data.message);
+                    }
                 } else {
                     this.setState({
                         loading: false,
@@ -156,7 +171,8 @@ export default class NewNote extends Component{
                         visible: false
                     });
                     message.success('日记更新成功');
-                    browserHistory.push(`/detail/${this.props.params.noteId}`);
+                    this.props.list.addNewNoteToList(1, res.data.item);
+                    browserHistory.replace(`/detail/${this.props.params.noteId}`);
                 }
             }, (err) => {
                 let msg = err.message || (err.data && err.data.message) || '更新日记错误';

@@ -75,7 +75,7 @@ export  default  class Index extends Component{
                     </h3>
                     <div className="item-summary" dangerouslySetInnerHTML={{__html: this.cutSumary(marked(item.content))}}></div>
                     <div className="item-meta">
-                        <span className="item-time">{dateHelper(item.created_at)}</span>
+                        <span className="item-time">最后更新于: {dateHelper(item.updated_at)}</span>
                         <ul className="item-action-list">
                             <li>
                                 <Link to={`/edit/${item.noteId}`} style={{display: loginStatus ? 'inline-block' : 'none'}}>编辑</Link>
@@ -191,6 +191,16 @@ export  default  class Index extends Component{
         )
     }
 
+    scrollListener(){
+        let triggerNextMinHeight = document.body.scrollHeight - document.body.clientHeight - document.body.scrollTop;
+        if(triggerNextMinHeight < 23){
+            if(!this.props.list.noteListLoading && this.props.list.hasNext){
+                this.props.list.changeLoadingStatus();
+                this.props.list.getNoteList();
+            }
+        }
+    }
+
     componentDidMount(){
         let renderer = new marked.Renderer();
 
@@ -218,14 +228,10 @@ export  default  class Index extends Component{
             }
         });
 
-        document.addEventListener('scroll', (e) => {
-            let triggerNextMinHeight = document.body.scrollHeight - document.body.clientHeight - document.body.scrollTop;
-            if(triggerNextMinHeight < 23){
-                if(!this.props.list.noteListLoading && this.props.list.hasNext){
-                    this.props.list.changeLoadingStatus();
-                    this.props.list.getNoteList();
-                }
-            }
-        }, false)
+        document.addEventListener('scroll', this.scrollListener, false)
+    }
+
+    componentWillUnmount(){
+        document.removeEventListener('scroll', this.scrollListener);
     }
 }

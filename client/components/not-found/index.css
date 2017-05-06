@@ -6,8 +6,7 @@
     margin: 0 auto;
     padding: 40px;
     position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 100px;
     background-color: #fff;
     width: 540px;
 }

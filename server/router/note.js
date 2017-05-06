@@ -12,18 +12,26 @@ let saveNote = async function (ctx,next) {
     let {title, content, isPublic} = ctx.request.body;
 
     try{
+        let createdTime = Date.now();
+        let updatedTime = createdTime;
+
         let res = await ctx.NoteModel.create({
             title: title,
             content: content,
-            isPublic: isPublic,
-            created_time: Date.now(),
-            updated_time: Date.now()
+            isPublic: isPublic
         });
 
         ctx.body = {
             code: 0,
             data: {
-                id: res.noteId
+                item: {
+                    noteId: res.noteId,
+                    title: title,
+                    content: content,
+                    isPublic: isPublic,
+                    created_at: createdTime,
+                    updated_at: updatedTime
+                }
             }
         }
     } catch (err) {
@@ -44,7 +52,14 @@ let updateNote = async function (ctx) {
     try {
         let res = await ctx.NoteModel.updateOne(
                 {noteId: noteId},
-                {$set:{title: title, content: content, isPublic: isPublic}}
+                {$set:
+                    {
+                        title: title,
+                        content: content,
+                        isPublic: isPublic,
+                        updated_at: Date.now()
+                    }
+                }
             );
         if(!res){
             ctx.body = {
@@ -56,7 +71,15 @@ let updateNote = async function (ctx) {
         } else {
             ctx.body = {
                 code: 0,
-                data: {}
+                data: {
+                    item: {
+                        noteId: noteId,
+                        title: title,
+                        content: content,
+                        isPublic: isPublic,
+                        updated_at: Date.now()
+                    }
+                }
             }
         }
     } catch (err) {

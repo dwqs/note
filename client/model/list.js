@@ -116,6 +116,50 @@ class List {
             noteId: noteId
         })
     }
+
+    @action
+    addNewNoteToList(type, item){
+        let oldNoteList = observable(this.noteList).slice();
+        let oldLatestList = observable(this.latestList).slice();
+
+        if(type) {
+            //update
+            oldNoteList = oldNoteList.map((note) => {
+                if(note.noteId === item.noteId){
+                    return {
+                        noteId: item.noteId,
+                        title: item.title,
+                        content: item.content,
+                        isPublic: item.isPublic,
+                        updated_at: item.updated_at
+                    }
+                } else {
+                    return note;
+                }
+            });
+
+            oldLatestList = oldLatestList.map((note) => {
+                if(note.noteId === item.noteId){
+                    return {
+                        noteId: item.noteId,
+                        title: item.title
+                    }
+                } else {
+                    return note;
+                }
+            })
+        } else {
+            //new
+            oldNoteList.unshift(item);
+            oldLatestList.unshift({
+                noteId: item.noteId,
+                title: item.title
+            });
+        }
+
+        this.noteList = oldNoteList;
+        this.latestList = oldLatestList;
+    }
 }
 
 let list = new List(1, 7, 5);
