@@ -11,15 +11,29 @@ let admin = require('../admin/users.json');
 let helper = require('../lib/index');
 
 let status = function (ctx) {
-    let token = ctx.cookies.get('token');
     ctx.response.set('content-type', 'application/json;charset=utf-8');
 
-    ctx.body = {
-        code: 0,
-        data: {
-            loginStatus: token ? true : false
-        }
-    };
+    let token = ctx.cookies.get('token');
+
+    if(token){
+        let decoded = jwt.verify(token, admin.privateKey);
+        ctx.state.userInfo = {
+            login: decoded === admin.token ? true : false
+        };
+        ctx.body = {
+            code: 0,
+            data: {
+                loginStatus: decoded === admin.token ? true : false
+            }
+        };
+    } else {
+        ctx.body = {
+            code: 0,
+            data: {
+                loginStatus: false
+            }
+        };
+    }
 };
 
 let sign = function (ctx) {
